@@ -1,0 +1,29 @@
+{
+  "voice_id": "藏鏡人",
+  "display_name": "藏鏡人（寶貝 Cover）",
+  "language": "zh-TW",
+  "gender": "female",
+  "edge_tts_voice": "zh-TW-HsiaoYuNeural",
+  "edge_tts_pitch": "+5Hz",
+  "edge_tts_rate": "-3%",
+  "source": "Facebook Video 261353023433065 — 蔡阿嘎 The First Take「嗎歌」藏鏡人寶貝Cover",
+  "source_url": "https://www.facebook.com/WithGaLoveTaiwan/videos/261353023433065/",
+  "description": "台灣女聲，具獨特嗓音質感，適合個性角色或特殊角色配音",
+  "files": {
+    "raw_audio": "raw_download.wav",
+    "clean_mono_44k": "clean_mono_44k.wav",
+    "reference": "reference.wav"
+  },
+  "audio_info": {
+    "raw_duration_sec": 199,
+    "raw_format": "WAV 48000Hz stereo",
+    "clean_format": "WAV 44100Hz mono",
+    "reference_duration_sec": 60,
+    "reference_offset_sec": 5
+  },
+  "usage": {
+    "gpt_sovits_reference": "reference.wav",
+    "edge_tts_fallback": "zh-TW-HsiaoYuNeural",
+    "recommended_for": "個性角色、反派、特殊配音"
+  }
+}

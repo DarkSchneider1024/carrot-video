@@ -1,0 +1,12 @@
+wavs/female_voice_0001.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第1句。
+wavs/female_voice_0002.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第2句。
+wavs/female_voice_0003.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第3句。
+wavs/female_voice_0004.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第4句。
+wavs/female_voice_0005.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第5句。
+wavs/female_voice_0006.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第6句。
+wavs/female_voice_0007.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第7句。
+wavs/female_voice_0008.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第8句。
+wavs/female_voice_0009.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第9句。
+wavs/female_voice_0010.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第10句。
+wavs/female_voice_0011.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第11句。
+wavs/female_voice_0012.wav|FemaleSpeaker|ZH|經典童話聲音範本句子第12句。

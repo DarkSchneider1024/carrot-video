@@ -1,0 +1,76 @@
+# ===========================
+# Node / Frontend
+# ===========================
+node_modules/
+dist/
+.vite/
+*.local
+
+# ===========================
+# Python
+# ===========================
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# ===========================
+# 大型二進位媒體檔案 (不入 git)
+# 請使用 Git LFS 或手動管理
+# ===========================
+
+# 影片檔
+*.mp4
+*.webm
+*.avi
+*.mov
+
+# 音頻原始/訓練集 (體積過大)
+vits_dataset/raw_audio.wav
+vits_dataset/clean_mono_44k.wav
+vits_dataset/wavs/
+public/assets/target_female_voice.wav
+
+# 聲音庫原始音頻 (只保留 voice_profile.json 和小型 sample)
+public/voice/*/raw_audio.wav
+public/voice/*/raw_download.wav
+public/voice/*/clean_mono_44k.wav
+public/voice/*/reference.wav
+
+# GIF 動畫幀暫存目錄
+public/assets/*_anim_frames/
+public/assets/*_sprite.png
+
+# 精靈圖動畫 GIF (可重新生成)
+public/assets/*_anim.gif
+
+# ===========================
+# 暫存與中間產物
+# ===========================
+scratch/
+*.log
+*.tmp
+
+# ===========================
+# rep/ 子專案 (各自獨立 repo，不一起提交)
+# ===========================
+rep/
+
+# ===========================
+# IDE & OS
+# ===========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/settings.json
+*.swp
+*~
+
+# ===========================
+# 環境設定
+# ===========================
+.env
+.env.local
+.env.production

@@ -1,0 +1,59 @@
+{
+  "train": {
+    "log_interval": 100,
+    "eval_interval": 500,
+    "seed": 1234,
+    "epochs": 200,
+    "learning_rate": 0.0002,
+    "betas": [
+      0.8,
+      0.99
+    ],
+    "eps": 1e-09,
+    "batch_size": 8,
+    "fp16_run": false,
+    "segment_size": 8192
+  },
+  "data": {
+    "training_files": "vits_dataset\\filelist.txt",
+    "sampling_rate": 44100,
+    "filter_length": 1024,
+    "hop_length": 256,
+    "win_length": 1024,
+    "n_mel_channels": 80,
+    "mel_fmin": 0.0,
+    "mel_fmax": null
+  },
+  "model": {
+    "inter_channels": 192,
+    "hidden_channels": 192,
+    "filter_channels": 768,
+    "n_heads": 2,
+    "n_layers": 6,
+    "kernel_size": 3,
+    "p_dropout": 0.1,
+    "resblock": "1",
+    "resblock_kernel_sizes": [
+      3,
+      7,
+      11
+    ],
+    "resblock_dilation_sizes": [
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        5
+      ]
+    ]
+  }
+}

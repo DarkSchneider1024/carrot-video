@@ -1,0 +1,22 @@
+{
+  "voice_id": "林志琳",
+  "display_name": "林志琳",
+  "language": "zh-TW",
+  "gender": "female",
+  "edge_tts_voice": "zh-TW-HsiaoYuNeural",
+  "edge_tts_pitch": "+15Hz",
+  "edge_tts_rate": "-5%",
+  "source": "YouTube Shorts OWnWts6r7HQ",
+  "description": "台灣女聲，溫柔甜美，適合童話旁白與女性角色配音",
+  "files": {
+    "raw_audio": "raw_audio.wav",
+    "clean_mono_44k": "clean_mono_44k.wav",
+    "reference": "reference.wav",
+    "sample_mp3": "sample.mp3"
+  },
+  "usage": {
+    "render_fairytale_video": "voice: zh-TW-HsiaoYuNeural, pitch: +15Hz",
+    "gpt_sovits_reference": "clean_mono_44k.wav",
+    "edge_tts_clone": "reference.wav"
+  }
+}
