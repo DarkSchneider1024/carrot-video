@@ -71,20 +71,20 @@ If new characters needed:
 
 ---
 
-### Step 3: (Optional) Generate Sprite Sheet Animation for Character
+### Step 3: Generate Transparent Low-Fatigue Sprite Sheet Animation
 If a character needs **frame-based GIF animation**:
 
 ```powershell
-# A) 從單張圖生成 3×3 精靈圖
+# A) 從單張圖生成 3×3 精靈圖 (若無現成 3x3 圖)
 & "python.exe" scripts/make_demo_sprite_sheet.py `
   --input public/assets/{char}.png `
   --output public/assets/{char}_sprite.png `
   --rows 3 --cols 3 --frame-size 512
 
-# B) 切割精靈圖 → 9 幀 → 動畫 GIF
+# B) 切割精靈圖 → 自動去背 → 2.5fps Ping-Pong 舒適循環 GIF
 & "python.exe" scripts/generate_sprite_animation.py `
   --sprite public/assets/{char}_sprite.png `
-  --rows 3 --cols 3 --fps 8 `
+  --rows 3 --cols 3 --fps 2.5 `
   --output public/assets/{char}_anim.gif `
   --size 480
 ```

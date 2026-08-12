@@ -233,23 +233,21 @@ def generate_fairytale_mp4(script_data: dict, output_mp4_path: str):
                 f":enable='between(t,{t_start},{t_end})'"
             )
 
-        # Build per-character motion overlay expression
-        char_motion = f"overlay=x='{motion_x}':y='{motion_y}'"
-
         # Detect if character image is an animated GIF sprite
         is_gif = char_img.lower().endswith(".gif")
 
-        # Compose FFmpeg filter_complex
-        # GIF input: [1:v] already contains looping frames — scale + overlay directly
-        # PNG input: static image, apply sin() motion via overlay expressions
+        # Build per-character motion overlay expression
+        # For GIF: use stable position so the GIF's own frame animation plays smoothly without double-jitter
+        # For PNG: use sin() motion formula for 2D character movement
         if is_gif:
-            # For GIF, scale the animated frames and composite over background
+            char_motion = "overlay=x='(W-w)/2':y='(H-h)/2+20'"
             filter_chain = (
                 f"[0:v]scale=1920:1080[bg];"
                 f"[1:v]scale=480:480[char];"
                 f"[bg][char]{char_motion}[v0];"
             )
         else:
+            char_motion = f"overlay=x='{motion_x}':y='{motion_y}'"
             filter_chain = f"[0:v]scale=1920:1080[bg];[1:v]scale=480:480[char];[bg][char]{char_motion}[v0];"
 
         for i, dt in enumerate(drawtext_filters):
