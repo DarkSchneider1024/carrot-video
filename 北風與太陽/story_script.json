@@ -1,5 +1,5 @@
 {
-  "storyTitle": "北風與太陽 (Aesop Fable)",
+  "storyTitle": "北風與太陽 (伊索寓言)",
   "voice": "zh-TW-HsiaoYuNeural",
   "pitch": "+15Hz",
   "scenes": [
@@ -7,36 +7,36 @@
       "sceneNum": 1,
       "dialog": "在蔚藍的天空中，狂傲的北風正向溫和的太陽吹噓自己的力量：『我是世界上最強大的！你看，那條山道上有個穿著厚大衣的旅人，誰能先讓他脫下大衣，誰就是贏家！』",
       "bgImage": "public/assets/bg_mountain.png",
-      "charImage": "public/assets/wolf.png",
-      "duration": 7.0
+      "charImage": "public/assets/north_wind_anim.gif",
+      "duration": 9.5
     },
     {
       "sceneNum": 2,
       "dialog": "北風吸足了一口氣，使勁向旅人吹去！狂風呼呼作響、寒風刺骨。然而，北風越吹得兇猛，旅人就把厚大衣裹得越緊，死死不肯鬆手！",
       "bgImage": "public/assets/bg_mountain.png",
-      "charImage": "public/assets/hunter.png",
-      "duration": 7.0
+      "charImage": "public/assets/traveler_coat.png",
+      "duration": 9.0
     },
     {
       "sceneNum": 3,
       "dialog": "北風吹得筋疲力竭只能放棄。此時，太陽從雲端露出了燦爛的微笑，向大地散發出溫和耀眼的陽光與暖意。",
       "bgImage": "public/assets/bg_mountain.png",
-      "charImage": "public/assets/red_hood_vector.png",
-      "duration": 6.0
+      "charImage": "public/assets/warm_sun.png",
+      "duration": 7.5
     },
     {
       "sceneNum": 4,
       "dialog": "隨著太陽的光照越來越溫暖，旅人開始熱得不斷擦汗。他擦了擦額頭上的汗水，高興地脫下了厚重的大衣，坐在樹蔭下涼快地休息！",
       "bgImage": "public/assets/bg_mountain.png",
-      "charImage": "public/assets/grandma.png",
-      "duration": 7.0
+      "charImage": "public/assets/traveler_rest.png",
+      "duration": 9.0
     },
     {
       "sceneNum": 5,
       "dialog": "勝負揭曉！太陽溫柔地對北風說：『看到了吧？溫和與關懷的力量，往往比暴力與強迫更能打動人心。』這就是經典伊索寓言「北風與太陽」教導我們的智慧。",
       "bgImage": "public/assets/bg_mountain.png",
-      "charImage": "public/assets/red_hood_vector.png",
-      "duration": 8.0
+      "charImage": "public/assets/warm_sun.png",
+      "duration": 10.0
     }
   ]
 }
