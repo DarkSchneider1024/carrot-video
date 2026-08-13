@@ -151,9 +151,9 @@ def split_dialog_into_chunks(dialog: str, total_duration: float, max_chars: int 
     return result
 
 
-async def synthesize_scene_audio(text: str, voice: str, pitch: str, output_mp3: str):
-    """Synthesize scene audio via edge-tts."""
-    communicate = edge_tts.Communicate(text, voice, pitch=pitch)
+async def synthesize_scene_audio(text: str, voice: str, pitch: str, rate: str, output_mp3: str):
+    """Synthesize scene audio via edge-tts with pitch and rate."""
+    communicate = edge_tts.Communicate(text, voice, pitch=pitch, rate=rate)
     await communicate.save(output_mp3)
 
 
@@ -169,6 +169,7 @@ def generate_fairytale_mp4(script_data: dict, output_mp4_path: str):
     scenes = script_data.get("scenes", [])
     voice_id = script_data.get("voice", "zh-TW-HsiaoYuNeural")
     pitch = script_data.get("pitch", "+15Hz")
+    rate = script_data.get("rate", "-5%")
 
     concat_list_path = os.path.join(work_dir, "concat.txt")
     temp_final_mp4 = os.path.join(work_dir, "temp_final_render.mp4")
@@ -192,7 +193,7 @@ def generate_fairytale_mp4(script_data: dict, output_mp4_path: str):
         print(f"\n[分鏡 {idx}/{len(scenes)}] 角色: {char_name} | 動畫: {motion_desc}")
 
         print(f"  ▶ 步驟 1/3 — 語音合成: '{dialog[:25]}...'")
-        asyncio.run(synthesize_scene_audio(dialog, voice_id, pitch, scene_audio))
+        asyncio.run(synthesize_scene_audio(dialog, voice_id, pitch, rate, scene_audio))
 
         # Measure actual audio duration via FFmpeg
         cmd_dur = ["ffmpeg", "-i", scene_audio]
