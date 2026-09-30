@@ -2,180 +2,743 @@
  "storyTitle": "青蛙王子（卡洛兒姐姐說故事）",
  "output": "frog_prince.mp4",
  "fps": 30,
- "size": [1920, 1080],
+ "size": [
+  1920,
+  1080
+ ],
  "gap": 0.3,
  "voices": {
   "narrator": {
-   "engine": "gemini", "model": "gemini-3.8-flash-tts", "voice": "Aoede", "label": "卡洛兒姐姐",
-   "style": "Voice Profile: Sister Carol (卡洛兒姐姐), an 18-year-old vibrant anime big sister with orange pigtails. Tone MUST be very youthful, high-spirited, lively, bubbly, and full of sweet girlish charm (18歲年輕活潑、甜滋滋、元氣滿滿的可愛撒嬌ㄋㄞ音大姐姐). Speak in fast-paced, bright, modern Taiwanese Mandarin with high energy and affectionate teasing sweetness. Full of personality and cheerful anime big sister vibes!"
-  },
-  "carol": {
-   "engine": "gemini", "model": "gemini-3.8-flash-tts", "voice": "Aoede", "label": "卡洛兒姐姐",
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Aoede",
+   "label": "卡洛兒姐姐",
    "style": "Voice Profile: Sister Carol (卡洛兒姐姐), an 18-year-old vibrant anime big sister with orange pigtails. Tone MUST be very youthful, high-spirited, lively, bubbly, and full of sweet girlish charm (18歲年輕活潑、甜滋滋、元氣滿滿的可愛撒嬌ㄋㄞ音大姐姐). Speak in fast-paced, bright, modern Taiwanese Mandarin with high energy and affectionate teasing sweetness. Full of personality and cheerful anime big sister vibes!"
   },
   "princess": {
-   "engine": "gemini", "model": "gemini-3.8-flash-tts", "voice": "Leda", "label": "公主",
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Leda",
+   "label": "公主",
    "style": "用台灣小公主甜美、嬌氣、活潑的少女聲音，有一點任性又很可愛，語氣清亮，語速自然。"
   },
   "frog": {
-   "engine": "gemini", "model": "gemini-3.8-flash-tts", "voice": "Puck", "label": "小青蛙",
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Puck",
+   "label": "小青蛙",
    "style": "用台灣可愛、帶一點鼻音、呱呱叫的小青蛙聲音，熱情友善又有點調皮，像卡通裡的小動物，語速輕快。"
   },
   "king": {
-   "engine": "gemini", "model": "gemini-3.8-flash-tts", "voice": "Orus", "label": "國王",
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Orus",
+   "label": "國王",
    "style": "用台灣中年國王的聲音，渾厚、沉穩、有威嚴，但對女兒很慈祥溫柔，語速稍慢。"
   },
   "prince": {
-   "engine": "gemini", "model": "gemini-3.8-flash-tts", "voice": "Achird", "label": "王子",
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Achird",
+   "label": "王子",
    "style": "用台灣年輕王子的聲音，溫柔、爽朗、帥氣有禮貌，帶著真誠的感謝，語速自然。"
   }
  },
  "cast": {
-  "princess": {"puppet": "princess", "height": 760},
-  "frog": {"puppet": "frog_prince", "height": 330},
-  "king": {"puppet": "king", "height": 900},
-  "prince": {"puppet": "prince", "height": 880},
-  "carol": {"puppet": "carrot_girl", "height": 820}
+  "princess": {
+   "puppet": "princess",
+   "height": 760
+  },
+  "frog": {
+   "puppet": "frog_prince",
+   "height": 330
+  },
+  "king": {
+   "puppet": "king",
+   "height": 850
+  },
+  "prince": {
+   "puppet": "prince",
+   "height": 820
+  }
  },
  "scenes": [
   {
    "bg": "castle_garden",
    "title_card": "青蛙王子",
-   "camera": [{"at": 0.0, "x": 1500, "y": 540, "zoom": 1.0}, {"at": 1.0, "x": 1700, "y": 520, "zoom": 1.08}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1500,
+     "y": 540,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1700,
+     "y": 520,
+     "zoom": 1.08
+    }
+   ],
    "actors": [],
    "beats": [
-    {"who": "narrator", "text": "小朋友，今天卡洛兒姐姐要說的故事是——《青蛙王子》！", "pause": 1.2}
+    {
+     "who": "narrator",
+     "text": "小朋友，今天卡洛兒姐姐要說的故事是——《青蛙王子》！",
+     "pause": 1.2
+    }
    ],
    "tail": 1.0
   },
   {
    "bg": "castle_garden",
-   "camera": [{"at": 0.0, "x": 1350, "y": 560, "zoom": 1.0}, {"at": 1.0, "x": 1400, "y": 600, "zoom": 1.12}],
-   "actors": [{"id": "princess", "x": 1150, "y": 990, "look": 0.3}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1350,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1400,
+     "y": 600,
+     "zoom": 1.12
+    }
+   ],
+   "actors": [
+    {
+     "id": "princess",
+     "x": 1150,
+     "y": 990,
+     "look": 0.3
+    }
+   ],
    "beats": [
-    {"who": "narrator", "text": "很久很久以前，在一座美麗的城堡裡，住著一位可愛的小公主。"},
-    {"who": "narrator", "text": "小公主最喜歡的玩具，就是一顆亮晶晶的金球。", "do": [{"id": "princess", "gesture": "happy"}]},
-    {"who": "princess", "text": "我最喜歡這顆金球了！拋高高～接住！", "do": [{"id": "princess", "gesture": "happy"}]},
-    {"who": "narrator", "text": "有一天，她在老水井旁邊玩，一不小心，金球咕嚕咕嚕滾進了井裡！",
-     "ui": {"sfx": "撲通！", "sfx_at": 3.2, "sfx_shake": false},
-     "do": [{"id": "princess", "walk_to": 1380, "speed": 0.8}]},
-    {"who": "princess", "text": "嗚嗚嗚……我的金球！我的金球掉下去了啦！", "do": [{"id": "princess", "shake": true}]}
+    {
+     "who": "narrator",
+     "text": "很久很久以前，在一座美麗的城堡裡，住著一位可愛的小公主。"
+    },
+    {
+     "who": "narrator",
+     "text": "小公主最喜歡的玩具，就是一顆亮晶晶的金球。",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "我最喜歡這顆金球了！拋高高～接住！",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "有一天，她在老水井旁邊玩，一不小心，金球咕嚕咕嚕滾進了井裡！",
+     "ui": {
+      "sfx": "撲通！",
+      "sfx_at": 3.2,
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "princess",
+       "walk_to": 1380,
+       "speed": 0.8
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "嗚嗚嗚……我的金球！我的金球掉下去了啦！",
+     "do": [
+      {
+       "id": "princess",
+       "shake": true
+      }
+     ]
+    }
    ]
   },
   {
    "bg": "castle_garden",
-   "camera": [{"at": 0.0, "x": 1500, "y": 600, "zoom": 1.15}, {"at": 1.0, "x": 1520, "y": 640, "zoom": 1.25}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1500,
+     "y": 600,
+     "zoom": 1.15
+    },
+    {
+     "at": 1.0,
+     "x": 1520,
+     "y": 640,
+     "zoom": 1.25
+    }
+   ],
    "actors": [
-    {"id": "princess", "puppet": "princess_noball", "x": 1380, "y": 990, "look": 0.4},
-    {"id": "frog", "x": 1640, "y": 1000, "look": -0.6, "hidden": true}
+    {
+     "id": "princess",
+     "puppet": "princess_noball",
+     "x": 1380,
+     "y": 990,
+     "look": 0.4
+    },
+    {
+     "id": "frog",
+     "x": 1640,
+     "y": 1000,
+     "look": -0.6,
+     "hidden": true
+    }
    ],
    "beats": [
-    {"who": "narrator", "text": "這時候，井邊跳出了一隻綠油油的小青蛙。", "ui": {"sfx": "呱！", "sfx_at": 1.6, "sfx_actor": "frog", "sfx_shake": false},
-     "do": [{"id": "frog", "fade_in": true, "at": 1.2}]},
-    {"who": "frog", "text": "呱！美麗的公主，妳為什麼哭得這麼傷心呢？"},
-    {"who": "princess", "text": "我的金球掉進井裡了，好深好深，我撿不到……", "do": [{"id": "princess", "look": 0.7}]},
-    {"who": "frog", "text": "我可以幫妳撿回來喔！可是，妳要答應我一件事。", "do": [{"id": "frog", "gesture": "point"}]},
-    {"who": "frog", "text": "讓我當妳的好朋友，陪妳一起吃飯、一起玩，好不好？", "do": [{"id": "frog", "gesture": "happy"}]},
-    {"who": "princess", "text": "好好好，我答應你！快點幫我撿金球嘛！", "do": [{"id": "princess", "nod": true}]},
-    {"who": "narrator", "text": "小青蛙撲通一聲跳進井裡，沒多久，就把金球捧了上來。",
-     "ui": {"sfx": "撲通！", "sfx_at": 1.2, "sfx_actor": "frog", "sfx_shake": false},
-     "do": [{"id": "frog", "fade_out": true, "at": 1.0, "fade_dur": 0.4}, {"id": "frog", "fade_in": true, "at": 3.2, "fade_dur": 0.4}]}
+    {
+     "who": "narrator",
+     "text": "這時候，井邊跳出了一隻綠油油的小青蛙。",
+     "ui": {
+      "sfx": "呱！",
+      "sfx_at": 1.6,
+      "sfx_actor": "frog",
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "frog",
+       "fade_in": true,
+       "at": 1.2
+      }
+     ]
+    },
+    {
+     "who": "frog",
+     "text": "呱！美麗的公主，妳為什麼哭得這麼傷心呢？"
+    },
+    {
+     "who": "princess",
+     "text": "我的金球掉進井裡了，好深好深，我撿不到……",
+     "do": [
+      {
+       "id": "princess",
+       "look": 0.7
+      }
+     ]
+    },
+    {
+     "who": "frog",
+     "text": "我可以幫妳撿回來喔！可是，妳要答應我一件事。",
+     "do": [
+      {
+       "id": "frog",
+       "gesture": "point"
+      }
+     ]
+    },
+    {
+     "who": "frog",
+     "text": "讓我當妳的好朋友，陪妳一起吃飯、一起玩，好不好？",
+     "do": [
+      {
+       "id": "frog",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "好好好，我答應你！快點幫我撿金球嘛！",
+     "do": [
+      {
+       "id": "princess",
+       "nod": true
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "小青蛙撲通一聲跳進井裡，沒多久，就把金球捧了上來。",
+     "ui": {
+      "sfx": "撲通！",
+      "sfx_at": 1.2,
+      "sfx_actor": "frog",
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "frog",
+       "fade_out": true,
+       "at": 1.0,
+       "fade_dur": 0.4
+      },
+      {
+       "id": "frog",
+       "fade_in": true,
+       "at": 3.2,
+       "fade_dur": 0.4
+      }
+     ]
+    }
    ]
   },
   {
    "bg": "castle_garden",
-   "camera": [{"at": 0.0, "x": 1450, "y": 580, "zoom": 1.12}, {"at": 1.0, "x": 1200, "y": 560, "zoom": 1.0}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1450,
+     "y": 580,
+     "zoom": 1.12
+    },
+    {
+     "at": 1.0,
+     "x": 1200,
+     "y": 560,
+     "zoom": 1.0
+    }
+   ],
    "actors": [
-    {"id": "princess", "x": 1380, "y": 990, "look": 0.4},
-    {"id": "frog", "x": 1640, "y": 1000, "look": -0.6}
+    {
+     "id": "princess",
+     "x": 1380,
+     "y": 990,
+     "look": 0.4
+    },
+    {
+     "id": "frog",
+     "x": 1640,
+     "y": 1000,
+     "look": -0.6
+    }
    ],
    "beats": [
-    {"who": "princess", "text": "哇！我的金球回來了！太棒了！", "do": [{"id": "princess", "gesture": "happy"}]},
-    {"who": "narrator", "text": "可是公主拿到金球，連謝謝都沒說，就蹦蹦跳跳地跑回城堡了。",
-     "do": [{"id": "princess", "walk_to": 500, "speed": 0.9, "at": 1.0}]},
-    {"who": "frog", "text": "呱呱！公主，等等我呀！妳答應過我的！", "do": [{"id": "frog", "walk_to": 1300, "speed": 0.5}]}
+    {
+     "who": "princess",
+     "text": "哇！我的金球回來了！太棒了！",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "可是公主拿到金球，連謝謝都沒說，就蹦蹦跳跳地跑回城堡了。",
+     "do": [
+      {
+       "id": "princess",
+       "walk_to": 500,
+       "speed": 0.9,
+       "at": 1.0
+      }
+     ]
+    },
+    {
+     "who": "frog",
+     "text": "呱呱！公主，等等我呀！妳答應過我的！",
+     "do": [
+      {
+       "id": "frog",
+       "walk_to": 1300,
+       "speed": 0.5
+      }
+     ]
+    }
    ]
   },
   {
    "bg": "palace_hall",
-   "camera": [{"at": 0.0, "x": 1100, "y": 560, "zoom": 1.0}, {"at": 1.0, "x": 1150, "y": 580, "zoom": 1.08}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1100,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1150,
+     "y": 580,
+     "zoom": 1.08
+    }
+   ],
    "actors": [
-    {"id": "king", "x": 1480, "y": 1000, "look": -0.3},
-    {"id": "princess", "x": 900, "y": 1000, "look": 0.3},
-    {"id": "frog", "x": 2500, "y": 1010, "look": -0.8, "hidden": true}
+    {
+     "id": "king",
+     "x": 1480,
+     "y": 1000,
+     "look": -0.3
+    },
+    {
+     "id": "princess",
+     "x": 900,
+     "y": 1000,
+     "look": 0.3
+    },
+    {
+     "id": "frog",
+     "x": 2500,
+     "y": 1010,
+     "look": -0.8,
+     "hidden": true
+    }
    ],
    "beats": [
-    {"who": "narrator", "text": "到了晚上，國王和公主正要一起吃晚餐。"},
-    {"who": "narrator", "text": "忽然，門口傳來了聲音。", "ui": {"sfx": "叩、叩、叩", "sfx_at": 1.0, "sfx_shake": false}},
-    {"who": "frog", "text": "呱！公主，我來找妳吃飯囉！", "do": [{"id": "frog", "fade_in": true}, {"id": "frog", "walk_to": 1900, "speed": 0.6, "at": 0.4}]},
-    {"who": "princess", "text": "哎唷！我才不要跟黏黏的青蛙一起吃飯呢！", "do": [{"id": "princess", "shake": true}, {"id": "princess", "look": -0.6}]},
-    {"who": "king", "text": "女兒啊，發生什麼事了？", "do": [{"id": "king", "look": -0.5}]},
-    {"who": "princess", "text": "我的金球掉進井裡，是牠幫我撿回來的……我答應要當牠的好朋友。", "do": [{"id": "princess", "look": 0.5, "gesture": "shy"}]},
-    {"who": "king", "text": "答應別人的事，就一定要做到。這叫做守信用。", "do": [{"id": "king", "gesture": "explain"}]},
-    {"who": "king", "text": "而且，牠在妳難過的時候幫助了妳，妳更應該好好謝謝牠。", "do": [{"id": "king", "nod": true}]},
-    {"who": "princess", "text": "好嘛……小青蛙，對不起。謝謝你幫我撿金球。", "do": [{"id": "princess", "gesture": "shy", "look": 0.8}]}
+    {
+     "who": "narrator",
+     "text": "到了晚上，國王和公主正要一起吃晚餐。"
+    },
+    {
+     "who": "narrator",
+     "text": "忽然，門口傳來了聲音。",
+     "ui": {
+      "sfx": "叩、叩、叩",
+      "sfx_at": 1.0,
+      "sfx_shake": false
+     }
+    },
+    {
+     "who": "frog",
+     "text": "呱！公主，我來找妳吃飯囉！",
+     "do": [
+      {
+       "id": "frog",
+       "fade_in": true
+      },
+      {
+       "id": "frog",
+       "walk_to": 1900,
+       "speed": 0.6,
+       "at": 0.4
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "哎唷！我才不要跟黏黏的青蛙一起吃飯呢！",
+     "do": [
+      {
+       "id": "princess",
+       "shake": true
+      },
+      {
+       "id": "princess",
+       "look": -0.6
+      }
+     ]
+    },
+    {
+     "who": "king",
+     "text": "女兒啊，發生什麼事了？",
+     "do": [
+      {
+       "id": "king",
+       "look": -0.5
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "我的金球掉進井裡，是牠幫我撿回來的……我答應要當牠的好朋友。",
+     "do": [
+      {
+       "id": "princess",
+       "look": 0.5,
+       "gesture": "shy"
+      }
+     ]
+    },
+    {
+     "who": "king",
+     "text": "答應別人的事，就一定要做到。這叫做守信用。",
+     "do": [
+      {
+       "id": "king",
+       "gesture": "explain"
+      }
+     ]
+    },
+    {
+     "who": "king",
+     "text": "而且，牠在妳難過的時候幫助了妳，妳更應該好好謝謝牠。",
+     "do": [
+      {
+       "id": "king",
+       "nod": true
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "好嘛……小青蛙，對不起。謝謝你幫我撿金球。",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "shy",
+       "look": 0.8
+      }
+     ]
+    }
    ]
   },
   {
    "bg": "palace_hall",
-   "camera": [{"at": 0.0, "x": 1300, "y": 600, "zoom": 1.1}, {"at": 1.0, "x": 1350, "y": 620, "zoom": 1.18}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1300,
+     "y": 600,
+     "zoom": 1.1
+    },
+    {
+     "at": 1.0,
+     "x": 1350,
+     "y": 620,
+     "zoom": 1.18
+    }
+   ],
    "actors": [
-    {"id": "king", "x": 2000, "y": 1000, "look": -0.5},
-    {"id": "princess", "x": 1000, "y": 1000, "look": 0.6},
-    {"id": "frog", "x": 1420, "y": 1010, "look": -0.6}
+    {
+     "id": "king",
+     "x": 2000,
+     "y": 1000,
+     "look": -0.5
+    },
+    {
+     "id": "princess",
+     "x": 1000,
+     "y": 1000,
+     "look": 0.6
+    },
+    {
+     "id": "frog",
+     "x": 1420,
+     "y": 1010,
+     "look": -0.6
+    }
    ],
    "beats": [
-    {"who": "narrator", "text": "公主遵守了約定。她和小青蛙一起吃飯、一起唱歌、一起玩遊戲。", "do": [{"id": "princess", "gesture": "happy"}, {"id": "frog", "gesture": "happy"}]},
-    {"who": "frog", "text": "呱呱～公主，跟妳一起玩真開心！", "do": [{"id": "frog", "gesture": "happy"}]},
-    {"who": "princess", "text": "嘻嘻，小青蛙，你好好笑喔！你真是我的好朋友！", "do": [{"id": "princess", "gesture": "happy"}]},
-    {"who": "narrator", "text": "就在公主真心說出「好朋友」的那一刻——",
-     "ui": {"sfx": "✨ 叮～ ✨", "sfx_at": 2.4, "sfx_actor": "frog", "sfx_shake": false},
-     "do": [{"id": "frog", "fade_out": true, "at": 2.6, "fade_dur": 1.0}], "pause": 0.6}
+    {
+     "who": "narrator",
+     "text": "公主遵守了約定。她和小青蛙一起吃飯、一起唱歌、一起玩遊戲。",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "happy"
+      },
+      {
+       "id": "frog",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "frog",
+     "text": "呱呱～公主，跟妳一起玩真開心！",
+     "do": [
+      {
+       "id": "frog",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "嘻嘻，小青蛙，你好好笑喔！你真是我的好朋友！",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "就在公主真心說出「好朋友」的那一刻——",
+     "ui": {
+      "sfx": "✨ 叮～ ✨",
+      "sfx_at": 2.4,
+      "sfx_actor": "frog",
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "frog",
+       "fade_out": true,
+       "at": 2.6,
+       "fade_dur": 1.0
+      }
+     ],
+     "pause": 0.6
+    }
    ]
   },
   {
    "bg": "palace_hall",
-   "camera": [{"at": 0.0, "x": 1300, "y": 560, "zoom": 1.05}, {"at": 1.0, "x": 1350, "y": 560, "zoom": 1.1}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1300,
+     "y": 560,
+     "zoom": 1.05
+    },
+    {
+     "at": 1.0,
+     "x": 1350,
+     "y": 560,
+     "zoom": 1.1
+    }
+   ],
    "actors": [
-    {"id": "king", "x": 2000, "y": 1000, "look": -0.5},
-    {"id": "princess", "x": 1000, "y": 1000, "look": 0.6},
-    {"id": "prince", "x": 1450, "y": 1005, "look": -0.5, "hidden": true}
+    {
+     "id": "king",
+     "x": 2000,
+     "y": 1000,
+     "look": -0.5
+    },
+    {
+     "id": "princess",
+     "x": 1000,
+     "y": 1000,
+     "look": 0.6
+    },
+    {
+     "id": "prince",
+     "x": 1450,
+     "y": 1005,
+     "look": -0.5,
+     "hidden": true
+    }
    ],
    "beats": [
-    {"who": "narrator", "text": "一道金色的光芒閃過，小青蛙竟然變成了一位英俊的王子！",
-     "ui": {"sfx": "✨ 閃閃 ✨", "sfx_at": 0.3, "sfx_actor": "prince", "sfx_shake": false},
-     "do": [{"id": "prince", "fade_in": true, "at": 0.3, "fade_dur": 1.2}]},
-    {"who": "princess", "text": "哇！你、你是誰呀？", "do": [{"id": "princess", "shake": true}]},
-    {"who": "prince", "text": "公主，我就是那隻小青蛙呀！", "do": [{"id": "prince", "gesture": "happy"}]},
-    {"who": "prince", "text": "我本來是一位王子，被壞巫婆施了魔法。只有遇到願意守信用、真心對我好的朋友，魔法才會解除。", "do": [{"id": "prince", "gesture": "explain"}]},
-    {"who": "prince", "text": "謝謝妳遵守了約定，也謝謝妳把我當成好朋友！", "do": [{"id": "prince", "nod": true}]},
-    {"who": "king", "text": "哈哈哈！太好了！今天真是個值得慶祝的日子！", "do": [{"id": "king", "gesture": "happy"}]}
+    {
+     "who": "narrator",
+     "text": "一道金色的光芒閃過，小青蛙竟然變成了一位英俊的王子！",
+     "ui": {
+      "sfx": "✨ 閃閃 ✨",
+      "sfx_at": 0.3,
+      "sfx_actor": "prince",
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "prince",
+       "fade_in": true,
+       "at": 0.3,
+       "fade_dur": 1.2
+      }
+     ]
+    },
+    {
+     "who": "princess",
+     "text": "哇！你、你是誰呀？",
+     "do": [
+      {
+       "id": "princess",
+       "shake": true
+      }
+     ]
+    },
+    {
+     "who": "prince",
+     "text": "公主，我就是那隻小青蛙呀！",
+     "do": [
+      {
+       "id": "prince",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "prince",
+     "text": "我本來是一位王子，被壞巫婆施了魔法。只有遇到願意守信用、真心對我好的朋友，魔法才會解除。",
+     "do": [
+      {
+       "id": "prince",
+       "gesture": "explain"
+      }
+     ]
+    },
+    {
+     "who": "prince",
+     "text": "謝謝妳遵守了約定，也謝謝妳把我當成好朋友！",
+     "do": [
+      {
+       "id": "prince",
+       "nod": true
+      }
+     ]
+    },
+    {
+     "who": "king",
+     "text": "哈哈哈！太好了！今天真是個值得慶祝的日子！",
+     "do": [
+      {
+       "id": "king",
+       "gesture": "happy"
+      }
+     ]
+    }
    ]
   },
   {
    "bg": "garden_sunset",
-   "camera": [{"at": 0.0, "x": 1300, "y": 560, "zoom": 1.0}, {"at": 1.0, "x": 1350, "y": 580, "zoom": 1.1}],
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1300,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1350,
+     "y": 580,
+     "zoom": 1.1
+    }
+   ],
    "actors": [
-    {"id": "princess", "x": 1150, "y": 990, "look": 0.5},
-    {"id": "prince", "x": 1500, "y": 995, "look": -0.5}
+    {
+     "id": "princess",
+     "x": 1150,
+     "y": 990,
+     "look": 0.5
+    },
+    {
+     "id": "prince",
+     "x": 1500,
+     "y": 995,
+     "look": -0.5
+    }
    ],
    "beats": [
-    {"who": "narrator", "text": "從此以後，公主和王子成了最要好的朋友。", "do": [{"id": "princess", "gesture": "happy"}]},
-    {"who": "narrator", "text": "他們每天一起在花園裡玩金球，過著快樂的日子。", "do": [{"id": "prince", "gesture": "happy"}]}
-   ],
-   "tail": 1.2
-  },
-  {
-   "bg": "garden_sunset",
-   "camera": [{"at": 0.0, "x": 1400, "y": 560, "zoom": 1.1}, {"at": 1.0, "x": 1400, "y": 580, "zoom": 1.18}],
-   "actors": [{"id": "carol", "x": 1400, "y": 995, "look": 0.0}],
-   "beats": [
-    {"who": "carol", "text": "小朋友，青蛙王子的故事好聽嗎？", "do": [{"id": "carol", "gesture": "happy"}]},
-    {"who": "carol", "text": "卡洛兒姐姐想問問你：一開始公主拿了金球就跑掉，這樣做對不對呀？", "do": [{"id": "carol", "gesture": "explain"}], "pause": 1.5},
-    {"who": "carol", "text": "嗯～不對，對不對？因為答應別人的事，就一定要做到，這就叫做「守信用」喔！", "do": [{"id": "carol", "nod": true}]},
-    {"who": "carol", "text": "還有喔，小青蛙雖然黏黏的，看起來有點奇怪，可是牠很善良、很願意幫助別人。", "do": [{"id": "carol", "gesture": "point"}]},
-    {"who": "carol", "text": "所以我們不可以只看外表，就不喜歡別人。", "do": [{"id": "carol", "gesture": "explain"}]},
-    {"who": "carol", "text": "你有沒有答應過爸爸媽媽什麼事呢？記得要做到喔！卡洛兒姐姐相信你一定可以的！", "do": [{"id": "carol", "gesture": "happy"}]}
+    {
+     "who": "narrator",
+     "text": "從此以後，公主和王子成了最要好的朋友。",
+     "do": [
+      {
+       "id": "princess",
+       "gesture": "happy"
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "他們每天一起在花園裡玩金球，過著快樂的日子。",
+     "do": [
+      {
+       "id": "prince",
+       "gesture": "happy"
+      }
+     ]
+    }
    ],
    "tail": 1.2
   }

@@ -1,0 +1,26 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft JhengHei,58,&H00FFFFFF,&H00FFFFFF,&H00402A1E,&H64000000,1,0,0,0,100,100,1,0,1,4,1,2,60,60,60,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:02.91,Default,,0,0,0,,小朋友　青蛙王子的故事好聽嗎？
+Dialogue: 0,0:00:03.38,0:00:04.91,Default,,0,0,0,,卡洛兒姐姐想問問你
+Dialogue: 0,0:00:05.03,0:00:07.12,Default,,0,0,0,,一開始公主拿了金球就跑掉
+Dialogue: 0,0:00:07.24,0:00:08.59,Default,,0,0,0,,這樣做對不對呀？
+Dialogue: 0,0:00:10.55,0:00:12.07,Default,,0,0,0,,嗯～不對　對不對？
+Dialogue: 0,0:00:12.20,0:00:14.83,Default,,0,0,0,,因為答應別人的事　就一定要做到
+Dialogue: 0,0:00:14.95,0:00:16.88,Default,,0,0,0,,這就叫做「守信用」喔！
+Dialogue: 0,0:00:17.35,0:00:19.66,Default,,0,0,0,,還有喔　小青蛙雖然黏黏的
+Dialogue: 0,0:00:19.78,0:00:22.50,Default,,0,0,0,,看起來有點奇怪　可是牠很善良
+Dialogue: 0,0:00:22.62,0:00:23.94,Default,,0,0,0,,很願意幫助別人
+Dialogue: 0,0:00:24.41,0:00:26.42,Default,,0,0,0,,所以我們不可以只看外表
+Dialogue: 0,0:00:26.54,0:00:27.58,Default,,0,0,0,,就不喜歡別人
+Dialogue: 0,0:00:28.05,0:00:30.57,Default,,0,0,0,,你有沒有答應過爸爸媽媽什麼事呢？
+Dialogue: 0,0:00:30.69,0:00:31.73,Default,,0,0,0,,記得要做到喔！
+Dialogue: 0,0:00:31.85,0:00:34.04,Default,,0,0,0,,卡洛兒姐姐相信你一定可以的！

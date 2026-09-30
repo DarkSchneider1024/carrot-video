@@ -217,7 +217,16 @@ def palace_hall():
     return W, L
 
 
-SCENES = {'castle_garden': lambda: garden(False), 'garden_sunset': lambda: garden(True), 'palace_hall': palace_hall}
+def keyscreen():
+    """flat magenta chroma-key backdrop for the VTuber-style Carol segment (Carol has green leaves / bows, so
+    not green)"""
+    W = 2400
+    bg = layer(W)
+    blob(bg, [(0, 0), (W, 0), (W, H), (0, H)], rgba('#ff00ff'))
+    return W, {'key': (bg, 1.0)}
+
+
+SCENES = {'keyscreen': keyscreen, 'castle_garden': lambda: garden(False), 'garden_sunset': lambda: garden(True), 'palace_hall': palace_hall}
 
 
 def main():
