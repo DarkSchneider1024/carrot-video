@@ -1,0 +1,80 @@
+{
+ "castle_garden": {
+  "width": 2800,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "castle_garden/sky.png",
+    "parallax": 0.1
+   },
+   {
+    "name": "far",
+    "file": "castle_garden/far.png",
+    "parallax": 0.3
+   },
+   {
+    "name": "mid",
+    "file": "castle_garden/mid.png",
+    "parallax": 0.6
+   },
+   {
+    "name": "ground",
+    "file": "castle_garden/ground.png",
+    "parallax": 1.0
+   },
+   {
+    "name": "fg",
+    "file": "castle_garden/fg.png",
+    "parallax": 1.2
+   }
+  ]
+ },
+ "garden_sunset": {
+  "width": 2800,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "garden_sunset/sky.png",
+    "parallax": 0.1
+   },
+   {
+    "name": "far",
+    "file": "garden_sunset/far.png",
+    "parallax": 0.3
+   },
+   {
+    "name": "mid",
+    "file": "garden_sunset/mid.png",
+    "parallax": 0.6
+   },
+   {
+    "name": "ground",
+    "file": "garden_sunset/ground.png",
+    "parallax": 1.0
+   },
+   {
+    "name": "fg",
+    "file": "garden_sunset/fg.png",
+    "parallax": 1.2
+   }
+  ]
+ },
+ "palace_hall": {
+  "width": 2600,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "palace_hall/wall.png",
+    "parallax": 0.85
+   },
+   {
+    "name": "room",
+    "file": "palace_hall/room.png",
+    "parallax": 1.0
+   }
+  ]
+ }
+}
