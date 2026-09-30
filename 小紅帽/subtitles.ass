@@ -1,0 +1,42 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft JhengHei,58,&H00FFFFFF,&H00FFFFFF,&H00402A1E,&H64000000,1,0,0,0,100,100,1,0,1,4,1,2,60,60,60,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:01.40,Default,,0,0,0,,從前從前，
+Dialogue: 0,0:00:01.52,0:00:04.09,Default,,0,0,0,,在森林旁邊的小木屋裡，
+Dialogue: 0,0:00:04.21,0:00:06.78,Default,,0,0,0,,住著一個可愛的小女孩。
+Dialogue: 0,0:00:07.25,0:00:10.45,Default,,0,0,0,,她總是披著外婆送的紅色斗篷，
+Dialogue: 0,0:00:10.57,0:00:13.30,Default,,0,0,0,,所以大家都叫她「小紅帽
+Dialogue: 0,0:00:13.42,0:00:13.72,Default,,0,0,0,,。
+Dialogue: 0,0:00:14.01,0:00:14.76,Default,,0,0,0,,媽媽，
+Dialogue: 0,0:00:14.88,0:00:19.43,Default,,0,0,0,,我這就把蛋糕和葡萄酒送去給外婆！
+Dialogue: 0,0:00:19.90,0:00:21.17,Default,,0,0,0,,媽媽叮嚀她：
+Dialogue: 0,0:00:21.29,0:00:23.25,Default,,0,0,0,,路上別離開小路，
+Dialogue: 0,0:00:23.37,0:00:25.79,Default,,0,0,0,,也不要和陌生人說話喔。
+Dialogue: 0,0:00:25.91,0:00:26.21,Default,,0,0,0,,
+Dialogue: 0,0:00:27.09,0:00:29.05,Default,,0,0,0,,小紅帽提著籃子，
+Dialogue: 0,0:00:29.17,0:00:31.92,Default,,0,0,0,,開開心心地走進了森林。
+Dialogue: 0,0:00:32.39,0:00:33.38,Default,,0,0,0,,啦啦啦～
+Dialogue: 0,0:00:33.50,0:00:35.33,Default,,0,0,0,,外婆收到禮物，
+Dialogue: 0,0:00:35.45,0:00:37.28,Default,,0,0,0,,一定會很開心！
+Dialogue: 0,0:00:38.25,0:00:39.18,Default,,0,0,0,,這時候，
+Dialogue: 0,0:00:39.30,0:00:43.12,Default,,0,0,0,,一隻大野狼從大樹後面走了出來。
+Dialogue: 0,0:00:43.59,0:00:44.24,Default,,0,0,0,,嘿嘿，
+Dialogue: 0,0:00:44.36,0:00:46.03,Default,,0,0,0,,可愛的小姑娘，
+Dialogue: 0,0:00:46.15,0:00:47.82,Default,,0,0,0,,妳要去哪裡呀？
+Dialogue: 0,0:00:48.29,0:00:50.84,Default,,0,0,0,,我要去森林的另一頭，
+Dialogue: 0,0:00:50.95,0:00:52.97,Default,,0,0,0,,探望生病的外婆。
+Dialogue: 0,0:00:53.84,0:00:55.94,Default,,0,0,0,,那邊的花開得正漂亮，
+Dialogue: 0,0:00:56.05,0:00:58.37,Default,,0,0,0,,何不摘一束送給外婆呢？
+Dialogue: 0,0:00:58.84,0:00:59.82,Default,,0,0,0,,對耶！
+Dialogue: 0,0:00:59.94,0:01:03.12,Default,,0,0,0,,外婆一定會喜歡的！
+Dialogue: 0,0:01:03.59,0:01:06.01,Default,,0,0,0,,天真的小紅帽跑去摘花，
+Dialogue: 0,0:01:06.13,0:01:09.47,Default,,0,0,0,,大野狼卻悄悄地往外婆家跑去了…
+Dialogue: 0,0:01:09.59,0:01:09.89,Default,,0,0,0,,…

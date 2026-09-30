@@ -1,0 +1,940 @@
+{
+ "storyTitle": "小紅帽（經典版・獵人登場）",
+ "output": "little_red_riding_hood_classic.mp4",
+ "fps": 30,
+ "size": [
+  1920,
+  1080
+ ],
+ "gap": 0.3,
+ "voices": {
+  "narrator": {
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Aoede",
+   "label": "卡洛兒姐姐",
+   "style": "Voice Profile: Sister Carol (卡洛兒姐姐), an 18-year-old vibrant anime big sister with orange pigtails. Tone MUST be very youthful, high-spirited, lively, bubbly, and full of sweet girlish charm (18歲年輕活潑、甜滋滋、元氣滿滿的可愛撒嬌ㄋㄞ音大姐姐). Speak in fast-paced, bright, modern Taiwanese Mandarin with high energy and affectionate teasing sweetness. Full of personality and cheerful anime big sister vibes!"
+  },
+  "red": {
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Leda",
+   "label": "小紅帽",
+   "style": "用台灣小女孩天真、甜美、活潑的聲音，聲音輕柔可愛、帶一點氣音，語氣開朗有精神，語速自然。"
+  },
+  "wolf": {
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Algenib",
+   "label": "大野狼",
+   "style": "用粗獷、沙啞、低沉的中年男人聲音（台灣口音），狡猾又貪心，說話帶著壞壞的笑意，語速正常。"
+  },
+  "grandma": {
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Gacrux",
+   "label": "外婆",
+   "style": "用台灣老奶奶的聲音，蒼老、慈祥、溫柔，略帶沙啞，說話慢條斯理。"
+  },
+  "hunter": {
+   "engine": "gemini",
+   "model": "gemini-3.8-flash-tts",
+   "voice": "Alnilam",
+   "label": "獵人",
+   "style": "用台灣中年男人渾厚、沉穩、可靠的聲音，爽朗又正直，像一位親切勇敢的獵人叔叔，語速自然。"
+  }
+ },
+ "cast": {
+  "red": {
+   "puppet": "red_hood",
+   "side": "red_hood_side",
+   "height": 760
+  },
+  "wolf": {
+   "puppet": "wolf",
+   "side": "wolf_side",
+   "height": 900
+  },
+  "grandma": {
+   "puppet": "grandma_classic",
+   "height": 640
+  },
+  "hunter": {
+   "puppet": "hunter",
+   "side": "hunter_side",
+   "height": 930
+  }
+ },
+ "scenes": [
+  {
+   "bg": "cottage",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1150,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1180,
+     "y": 600,
+     "zoom": 1.12
+    }
+   ],
+   "actors": [
+    {
+     "id": "red",
+     "x": 1180,
+     "y": 1010,
+     "look": 0.0
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "從前從前，在森林旁邊的小木屋裡，住著一個可愛的小女孩。"
+    },
+    {
+     "who": "narrator",
+     "text": "她總是披著外婆送的紅色斗篷，所以大家都叫她「小紅帽」。",
+     "do": [
+      {
+       "id": "red",
+       "gesture": "shy"
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "有一天，媽媽對她說：「外婆生病了，把這籃蛋糕和葡萄酒送去給她吧。記得別離開小路，也不要和陌生人說話喔。」",
+     "do": [
+      {
+       "id": "red",
+       "look": -0.3
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "好的，媽媽！我一定乖乖走小路，馬上把蛋糕送去給外婆！",
+     "do": [
+      {
+       "id": "red",
+       "gesture": "explain",
+       "look": -0.35,
+       "nod": true
+      }
+     ]
+    }
+   ],
+   "tail": 0.5
+  },
+  {
+   "bg": "forest",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1000,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 2350,
+     "y": 560,
+     "zoom": 1.0
+    }
+   ],
+   "actors": [
+    {
+     "id": "red",
+     "x": 650,
+     "y": 945,
+     "look": 0.3
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "小紅帽提著籃子，開開心心地走進了森林。",
+     "do": [
+      {
+       "id": "red",
+       "walk_to": 1700
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "啦啦啦～外婆吃到蛋糕，病一定很快就會好起來！",
+     "do": [
+      {
+       "id": "red",
+       "walk_to": 2650
+      }
+     ]
+    }
+   ],
+   "tail": 0.4
+  },
+  {
+   "bg": "forest",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1500,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1560,
+     "y": 560,
+     "zoom": 1.05
+    }
+   ],
+   "actors": [
+    {
+     "id": "red",
+     "x": 1200,
+     "y": 1010,
+     "look": 0.2
+    },
+    {
+     "id": "wolf",
+     "x": 2500,
+     "y": 1015,
+     "look": -0.3
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "這時候，一隻大野狼從大樹後面走了出來。",
+     "do": [
+      {
+       "id": "wolf",
+       "walk_to": 1870
+      },
+      {
+       "id": "red",
+       "look": 0.6
+      }
+     ]
+    },
+    {
+     "who": "wolf",
+     "text": "嘿嘿，可愛的小姑娘，妳一個人要去哪裡呀？",
+     "do": [
+      {
+       "id": "wolf",
+       "gesture": "sly",
+       "look": -0.6
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "我要去森林的另一頭，探望生病的外婆。",
+     "do": [
+      {
+       "id": "red",
+       "gesture": "explain",
+       "look": 0.55
+      }
+     ]
+    },
+    {
+     "who": "wolf",
+     "text": "喔？那妳外婆住在哪裡呢？",
+     "do": [
+      {
+       "id": "wolf",
+       "look": -0.55
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "就在三棵大橡樹下面的小木屋呀！",
+     "do": [
+      {
+       "id": "red",
+       "gesture": "point",
+       "look": 0.5
+      }
+     ]
+    },
+    {
+     "who": "wolf",
+     "text": "嘿嘿……一個老奶奶，再加上一個小女孩，今天可以好好飽餐一頓了。",
+     "do": [
+      {
+       "id": "wolf",
+       "gesture": "sly",
+       "look": 0.3
+      }
+     ]
+    }
+   ],
+   "tail": 0.4
+  },
+  {
+   "bg": "meadow",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1300,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1350,
+     "y": 560,
+     "zoom": 1.06
+    }
+   ],
+   "actors": [
+    {
+     "id": "red",
+     "x": 1050,
+     "y": 1010,
+     "look": 0.5,
+     "flower": true
+    },
+    {
+     "id": "wolf",
+     "x": 1640,
+     "y": 1015,
+     "look": -0.5
+    }
+   ],
+   "beats": [
+    {
+     "who": "wolf",
+     "text": "小紅帽，妳看，那邊的花開得多漂亮！何不摘一束送給外婆呢？",
+     "do": [
+      {
+       "id": "wolf",
+       "gesture": "point",
+       "look": -0.5
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "對耶！外婆看到花，一定會很開心的！",
+     "do": [
+      {
+       "id": "red",
+       "gesture": "happy",
+       "look": 0.2,
+       "nod": true
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "小紅帽忘了媽媽的叮嚀，跑去摘花；大野狼卻悄悄地，往外婆家跑去了……",
+     "do": [
+      {
+       "id": "red",
+       "walk_to": 520,
+       "look": -0.5
+      },
+      {
+       "id": "wolf",
+       "walk_to": 2650,
+       "look": 0.6,
+       "speed": 1.8
+      }
+     ]
+    }
+   ],
+   "tail": 1.0
+  },
+  {
+   "bg": "cottage_door",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 960,
+     "y": 540,
+     "zoom": 1.0
+    },
+    {
+     "at": 0.5,
+     "x": 1300,
+     "y": 540,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1330,
+     "y": 560,
+     "zoom": 1.06
+    }
+   ],
+   "actors": [
+    {
+     "id": "wolf",
+     "x": 80,
+     "y": 1010,
+     "look": 0.4
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "大野狼一路跑到外婆家門口，輕輕敲了敲門。",
+     "ui": {
+      "sfx": "叩、叩、叩",
+      "sfx_at": 3.0,
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "wolf",
+       "walk_to": 1260,
+       "speed": 1.3
+      }
+     ]
+    },
+    {
+     "who": "wolf",
+     "text": "外婆，是我，小紅帽。我帶蛋糕來看您了。",
+     "style": "用粗獷沙啞的男人嗓音，硬捏著嗓子假裝成甜美的小女孩，裝得很假、很好笑，語速正常。",
+     "do": [
+      {
+       "id": "wolf",
+       "gesture": "sly",
+       "look": 0.6
+      }
+     ]
+    }
+   ],
+   "tail": 0.4
+  },
+  {
+   "bg": "grandma_room_day",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1350,
+     "y": 560,
+     "zoom": 1.02
+    },
+    {
+     "at": 0.35,
+     "x": 1150,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1420,
+     "y": 560,
+     "zoom": 1.08
+    }
+   ],
+   "actors": [
+    {
+     "id": "grandma",
+     "x": 1710,
+     "y": 1005,
+     "look": -0.3
+    },
+    {
+     "id": "wolf",
+     "x": 260,
+     "y": 1000,
+     "look": 0.4,
+     "hidden": true
+    }
+   ],
+   "beats": [
+    {
+     "who": "grandma",
+     "text": "門沒有鎖，自己進來吧，乖孩子。",
+     "do": [
+      {
+       "id": "grandma",
+       "look": -0.6
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "大野狼推開門，一個箭步衝到床邊，張開大嘴，一口就把外婆吞進了肚子裡！",
+     "do": [
+      {
+       "id": "wolf",
+       "fade_in": true,
+       "fade_dur": 0.4,
+       "at": 0.2
+      },
+      {
+       "id": "wolf",
+       "walk_to": 1330,
+       "speed": 2.2,
+       "at": 0.9
+      },
+      {
+       "id": "grandma",
+       "fade_out": true,
+       "at": 3.6
+      }
+     ]
+    },
+    {
+     "who": "wolf",
+     "text": "嘿嘿嘿，接下來，就等小紅帽自己送上門囉！",
+     "do": [
+      {
+       "id": "wolf",
+       "gesture": "sly",
+       "look": -0.4
+      }
+     ]
+    }
+   ],
+   "tail": 0.5
+  },
+  {
+   "bg": "grandma_room_day_bed",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1300,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 0.8,
+     "x": 1420,
+     "y": 540,
+     "zoom": 1.1
+    },
+    {
+     "at": 0.86,
+     "x": 1560,
+     "y": 470,
+     "zoom": 1.28
+    },
+    {
+     "at": 1.0,
+     "x": 1500,
+     "y": 520,
+     "zoom": 1.15
+    }
+   ],
+   "actors": [
+    {
+     "id": "wolf",
+     "puppet": "wolf_granny",
+     "side": null,
+     "x": 1710,
+     "y": 1462,
+     "look": -0.35
+    },
+    {
+     "id": "red",
+     "x": 250,
+     "y": 1000,
+     "look": 0.3,
+     "flower": true
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "大野狼穿上外婆的睡衣、戴上睡帽，躲進了被窩。不久，小紅帽抱著一束花來了。",
+     "do": [
+      {
+       "id": "red",
+       "walk_to": 1150,
+       "speed": 1.2,
+       "at": 2.5
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "外婆，我來了！咦……外婆，您的耳朵怎麼這麼大？",
+     "do": [
+      {
+       "id": "red",
+       "look": 0.6
+      }
+     ]
+    },
+    {
+     "who": "wolf",
+     "text": "耳朵大，才能把妳的聲音聽得更清楚呀。",
+     "style": "用粗獷沙啞的男人嗓音，硬捏著嗓子假裝成溫柔的老奶奶，裝得很假，語速正常。"
+    },
+    {
+     "who": "red",
+     "text": "外婆，那您的眼睛怎麼這麼大？"
+    },
+    {
+     "who": "wolf",
+     "text": "眼睛大，才能把妳看得更仔細呀。",
+     "style": "用粗獷沙啞的男人嗓音，硬捏著嗓子假裝成溫柔的老奶奶，裝得很假，語速正常。"
+    },
+    {
+     "who": "red",
+     "text": "外婆，那您的手怎麼這麼大？"
+    },
+    {
+     "who": "wolf",
+     "text": "手大，才能把妳抱得更緊呀。",
+     "style": "用粗獷沙啞的男人嗓音，硬捏著嗓子假裝成溫柔的老奶奶，裝得很假，語速正常。"
+    },
+    {
+     "who": "red",
+     "text": "那……外婆，您的嘴巴怎麼這麼大？",
+     "pause": 0.3
+    },
+    {
+     "who": "wolf",
+     "text": "嘴巴大，才能一口把妳吃掉！",
+     "ui": {
+      "sfx": "嗷嗚！"
+     },
+     "do": [
+      {
+       "id": "wolf",
+       "rise_to": 1150
+      },
+      {
+       "id": "wolf",
+       "shake": true,
+       "shake_dur": 1.2
+      },
+      {
+       "id": "red",
+       "look": 0.9
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "大野狼從床上跳起來，一口把小紅帽也吞了下去。",
+     "do": [
+      {
+       "id": "red",
+       "fade_out": true,
+       "at": 1.4
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "吃得飽飽的大野狼，又躺回床上，呼嚕呼嚕地睡著了。",
+     "ui": {
+      "sfx": "呼嚕～呼嚕～",
+      "sfx_at": 2.4,
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "wolf",
+       "rise_to": 1462,
+       "at": 0.6
+      },
+      {
+       "id": "wolf",
+       "expr": "sleep",
+       "at": 1.8
+      }
+     ]
+    }
+   ],
+   "tail": 0.5
+  },
+  {
+   "bg": "cottage",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1500,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1050,
+     "y": 580,
+     "zoom": 1.08
+    }
+   ],
+   "actors": [
+    {
+     "id": "hunter",
+     "x": 2250,
+     "y": 1010,
+     "look": -0.3
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "這時候，一位獵人正好經過外婆家門口。",
+     "do": [
+      {
+       "id": "hunter",
+       "walk_to": 1450
+      }
+     ]
+    },
+    {
+     "who": "hunter",
+     "text": "咦？外婆的打呼聲怎麼這麼大？平常可不是這樣的。",
+     "ui": {
+      "sfx": "呼嚕～",
+      "sfx_shake": false
+     },
+     "do": [
+      {
+       "id": "hunter",
+       "look": -0.6
+      }
+     ]
+    },
+    {
+     "who": "hunter",
+     "text": "不對勁，我得進去看看！",
+     "do": [
+      {
+       "id": "hunter",
+       "walk_to": 800,
+       "at": 0.8,
+       "speed": 1.4
+      }
+     ]
+    }
+   ],
+   "tail": 0.4
+  },
+  {
+   "bg": "grandma_room_day_bed",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1250,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1300,
+     "y": 560,
+     "zoom": 1.05
+    }
+   ],
+   "actors": [
+    {
+     "id": "wolf",
+     "puppet": "wolf_granny",
+     "side": null,
+     "x": 1710,
+     "y": 1462,
+     "look": -0.2,
+     "expr": "sleep"
+    },
+    {
+     "id": "hunter",
+     "x": 250,
+     "y": 1010,
+     "look": 0.4
+    },
+    {
+     "id": "red",
+     "x": 1250,
+     "y": 1000,
+     "look": 0.3,
+     "hidden": true,
+     "flower": true
+    }
+   ],
+   "beats": [
+    {
+     "who": "narrator",
+     "text": "獵人輕輕推開門，看見大野狼穿著外婆的睡衣，挺著圓滾滾的肚子，睡得正香。",
+     "ui": {
+      "sfx": "呼嚕～",
+      "sfx_at": 3.0,
+      "sfx_shake": false,
+      "sfx_actor": "wolf"
+     },
+     "do": [
+      {
+       "id": "hunter",
+       "walk_to": 950,
+       "speed": 1.2
+      }
+     ]
+    },
+    {
+     "who": "hunter",
+     "text": "原來是你這隻壞野狼！肚子這麼鼓，外婆一定被你吞下去了！",
+     "do": [
+      {
+       "id": "hunter",
+       "gesture": "point",
+       "look": 0.6
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "獵人拿出剪刀，小心翼翼地剪開大野狼的肚子。先跳出來的是小紅帽，接著，外婆也平安地爬了出來！",
+     "do": [
+      {
+       "id": "red",
+       "fade_in": true,
+       "at": 4.5
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "謝謝獵人叔叔！大野狼的肚子裡又黑又悶，好可怕喔！",
+     "do": [
+      {
+       "id": "red",
+       "gesture": "happy",
+       "look": -0.6
+      }
+     ]
+    },
+    {
+     "who": "hunter",
+     "text": "別怕，沒事了。我們撿些大石頭塞進牠的肚子裡，給牠一點教訓！",
+     "do": [
+      {
+       "id": "hunter",
+       "gesture": "explain",
+       "look": 0.5,
+       "nod": true
+      }
+     ]
+    },
+    {
+     "who": "narrator",
+     "text": "大野狼醒來，只覺得肚子好重好重，搖搖晃晃地逃進森林，從此再也不敢出現了。",
+     "do": [
+      {
+       "id": "wolf",
+       "expr": "open",
+       "at": 0.3
+      },
+      {
+       "id": "wolf",
+       "rise_to": 1150,
+       "at": 1.0
+      },
+      {
+       "id": "wolf",
+       "walk_to": 3000,
+       "at": 2.2,
+       "speed": 0.7
+      },
+      {
+       "id": "red",
+       "look": 0.7
+      },
+      {
+       "id": "hunter",
+       "look": 0.8
+      }
+     ]
+    }
+   ],
+   "tail": 0.5
+  },
+  {
+   "bg": "grandma_room_day",
+   "camera": [
+    {
+     "at": 0.0,
+     "x": 1200,
+     "y": 560,
+     "zoom": 1.0
+    },
+    {
+     "at": 1.0,
+     "x": 1260,
+     "y": 560,
+     "zoom": 1.06
+    }
+   ],
+   "actors": [
+    {
+     "id": "grandma",
+     "x": 1710,
+     "y": 1005,
+     "look": -0.3
+    },
+    {
+     "id": "red",
+     "x": 1180,
+     "y": 1000,
+     "look": 0.4,
+     "flower": true
+    },
+    {
+     "id": "hunter",
+     "x": 700,
+     "y": 1010,
+     "look": 0.3
+    }
+   ],
+   "beats": [
+    {
+     "who": "grandma",
+     "text": "謝謝你，好心的獵人。小紅帽，快來，我們一起吃蛋糕吧。",
+     "do": [
+      {
+       "id": "grandma",
+       "look": -0.6,
+       "nod": true
+      }
+     ]
+    },
+    {
+     "who": "hunter",
+     "text": "外婆，您好好休息。以後有我在森林裡巡邏，大家都可以放心了。",
+     "do": [
+      {
+       "id": "hunter",
+       "gesture": "explain",
+       "look": 0.5
+      }
+     ]
+    },
+    {
+     "who": "red",
+     "text": "我知道錯了。以後我一定乖乖走小路，再也不跟陌生人說話了！",
+     "ui": {
+      "bgm": true,
+      "bgm_vol": 0.32
+     },
+     "do": [
+      {
+       "id": "red",
+       "gesture": "shy",
+       "look": -0.3,
+       "nod": true
+      }
+     ]
+    }
+   ],
+   "tail": 5.5,
+   "end_card": "全劇終"
+  }
+ ]
+}

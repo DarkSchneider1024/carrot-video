@@ -74,3 +74,11 @@ Thumbs.db
 .env
 .env.local
 .env.production
+
+# ===========================
+# live2d 渲染中間產物 / 執行紀錄
+# ===========================
+_frames/
+_*_log.txt
+*_batch_rejected*.wav
+classic_update.zip

@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Pose check</title>
+<style>html,body{margin:0;background:#e6e8f0}canvas{display:block}</style></head><body>
+<canvas id="c" width="600" height="600"></canvas>
+<script type="module">
+// renders one puppet with given params; used by live2d/pose_sheet.py (nine-axis keyform sheets)
+import { loadINP, Puppet, Renderer } from './inochi-lite.js';
+const q = new URLSearchParams(location.search);
+const d = await loadINP(q.get('model'));
+const p = new Puppet(d), r = new Renderer(document.getElementById('c'));
+r.attach(p);
+window.shot = (params, view) => {
+  for (const n of Object.keys(p.byName)) p.byName[n].value = [...p.byName[n].defaults];
+  for (const [k, v] of Object.entries(params)) p.set(k, ...[].concat(v));
+  p.update(); r.draw(view);
+  return document.getElementById('c').toDataURL('image/png');
+};
+window.ready = true;
+</script></body></html>

@@ -1,0 +1,313 @@
+{
+ "cottage": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "cottage/sky.png",
+    "parallax": 0.1
+   },
+   {
+    "name": "far",
+    "file": "cottage/far.png",
+    "parallax": 0.3
+   },
+   {
+    "name": "mid",
+    "file": "cottage/mid.png",
+    "parallax": 0.7
+   },
+   {
+    "name": "ground",
+    "file": "cottage/ground.png",
+    "parallax": 1.0
+   }
+  ]
+ },
+ "forest": {
+  "width": 3400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "forest/sky.png",
+    "parallax": 0.1
+   },
+   {
+    "name": "far",
+    "file": "forest/far.png",
+    "parallax": 0.25
+   },
+   {
+    "name": "mid",
+    "file": "forest/mid.png",
+    "parallax": 0.6
+   },
+   {
+    "name": "ground",
+    "file": "forest/ground.png",
+    "parallax": 1.0
+   },
+   {
+    "name": "fg",
+    "file": "forest/fg.png",
+    "parallax": 1.25
+   }
+  ]
+ },
+ "meadow": {
+  "width": 2600,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "meadow/sky.png",
+    "parallax": 0.1
+   },
+   {
+    "name": "far",
+    "file": "meadow/far.png",
+    "parallax": 0.3
+   },
+   {
+    "name": "ground",
+    "file": "meadow/ground.png",
+    "parallax": 1.0
+   },
+   {
+    "name": "fg",
+    "file": "meadow/fg.png",
+    "parallax": 1.2
+   }
+  ]
+ },
+ "bedroom_night": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "bedroom_night/wall.png",
+    "parallax": 0.9,
+    "front": false
+   },
+   {
+    "name": "floor",
+    "file": "bedroom_night/floor.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "room",
+    "file": "bedroom_night/room.png",
+    "parallax": 1.0,
+    "front": false
+   }
+  ]
+ },
+ "forest_night": {
+  "width": 3400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "forest_night/sky.png",
+    "parallax": 0.1,
+    "front": false
+   },
+   {
+    "name": "far",
+    "file": "forest_night/far.png",
+    "parallax": 0.25,
+    "front": false
+   },
+   {
+    "name": "mid",
+    "file": "forest_night/mid.png",
+    "parallax": 0.6,
+    "front": false
+   },
+   {
+    "name": "ground",
+    "file": "forest_night/ground.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "fg",
+    "file": "forest_night/fg.png",
+    "parallax": 1.25,
+    "front": false
+   }
+  ]
+ },
+ "grandma_room": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "grandma_room/wall.png",
+    "parallax": 0.9,
+    "front": false
+   },
+   {
+    "name": "floor",
+    "file": "grandma_room/floor.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "room",
+    "file": "grandma_room/room.png",
+    "parallax": 1.0,
+    "front": false
+   }
+  ]
+ },
+ "grandma_room_candle": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "grandma_room_candle/wall.png",
+    "parallax": 0.9,
+    "front": false
+   },
+   {
+    "name": "floor",
+    "file": "grandma_room_candle/floor.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "room",
+    "file": "grandma_room_candle/room.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "front",
+    "file": "grandma_room_candle/front.png",
+    "parallax": 1.0,
+    "front": true
+   }
+  ]
+ },
+ "living_room": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "living_room/wall.png",
+    "parallax": 0.9,
+    "front": false
+   },
+   {
+    "name": "floor",
+    "file": "living_room/floor.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "room",
+    "file": "living_room/room.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "front",
+    "file": "living_room/front.png",
+    "parallax": 1.0,
+    "front": true
+   }
+  ]
+ },
+ "grandma_room_day": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "grandma_room_day/wall.png",
+    "parallax": 0.9,
+    "front": false
+   },
+   {
+    "name": "floor",
+    "file": "grandma_room_day/floor.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "room",
+    "file": "grandma_room_day/room.png",
+    "parallax": 1.0,
+    "front": false
+   }
+  ]
+ },
+ "grandma_room_day_bed": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "wall",
+    "file": "grandma_room_day_bed/wall.png",
+    "parallax": 0.9,
+    "front": false
+   },
+   {
+    "name": "floor",
+    "file": "grandma_room_day_bed/floor.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "room",
+    "file": "grandma_room_day_bed/room.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "front",
+    "file": "grandma_room_day_bed/front.png",
+    "parallax": 1.0,
+    "front": true
+   }
+  ]
+ },
+ "cottage_door": {
+  "width": 2400,
+  "height": 1080,
+  "layers": [
+   {
+    "name": "sky",
+    "file": "cottage_door/sky.png",
+    "parallax": 0.1,
+    "front": false
+   },
+   {
+    "name": "far",
+    "file": "cottage_door/far.png",
+    "parallax": 0.3,
+    "front": false
+   },
+   {
+    "name": "ground",
+    "file": "cottage_door/ground.png",
+    "parallax": 1.0,
+    "front": false
+   },
+   {
+    "name": "house",
+    "file": "cottage_door/house.png",
+    "parallax": 1.0,
+    "front": false
+   }
+  ]
+ }
+}

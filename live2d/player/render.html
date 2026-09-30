@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Live2D stage render</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block;width:1920px;height:1080px}</style>
+</head><body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+import { Stage } from './stage.js';
+const q = new URLSearchParams(location.search);
+const tlUrl = q.get('timeline') || '/小紅帽/timeline.json';
+const base = tlUrl.slice(0, tlUrl.lastIndexOf('/'));
+const [tl, bgs] = await Promise.all([fetch(tlUrl).then((r) => r.json()), fetch(`${base}/backgrounds/layers.json`).then((r) => r.json())]);
+const stage = new Stage(document.getElementById('c'), tl, bgs, base);
+await stage.load();
+window.stage = stage;
+window.renderFrame = (i) => { stage.frame(i); return document.getElementById('c').toDataURL('image/jpeg', 0.93); };
+window.stageReady = true;
+if (q.has('play')) {                      // live preview in a normal browser
+  const t0 = performance.now(), f0 = +(q.get('play') || 0);
+  const tick = () => { stage.frame(f0 + Math.floor((performance.now() - t0) / 1000 * tl.fps)); requestAnimationFrame(tick); };
+  tick();
+}
+</script></body></html>

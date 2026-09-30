@@ -1,0 +1,67 @@
+{
+  "storyTitle": "小紅帽（試作版）",
+  "fps": 30,
+  "size": [1920, 1080],
+  "gap": 0.35,
+  "voices": {
+    "narrator": {
+      "engine": "gemini",
+      "model": "gemini-3.8-flash-tts",
+      "voice": "Charon",
+      "label": "旁白",
+      "style": "用台灣知名配音員「星期天」的語氣與口音：沉穩、磁性微帶低沉的台灣男聲廣播腔，如同探索頻道動物紀錄片旁白般一本正經、字正腔圓，隱約帶著微妙的幽默調侃與戲劇反差感，咬字清晰自然不捲舌，語速適中穩健。"
+    },
+    "red":      {"voice": "zh-TW-HsiaoYuNeural",   "rate": "+4%", "pitch": "+22Hz", "label": "小紅帽"},
+    "wolf":     {"voice": "zh-TW-YunJheNeural",    "rate": "-8%", "pitch": "-18Hz", "label": "大野狼"}
+  },
+  "cast": {
+    "red":  {"puppet": "red_hood", "side": "red_hood_side", "height": 760},
+    "wolf": {"puppet": "wolf", "side": "wolf_side", "height": 900}
+  },
+  "scenes": [
+    {
+      "bg": "cottage",
+      "camera": [{"at": 0.0, "x": 1150, "y": 560, "zoom": 1.0}, {"at": 1.0, "x": 1180, "y": 600, "zoom": 1.12}],
+      "actors": [{"id": "red", "x": 1180, "y": 1010, "look": 0.0}],
+      "beats": [
+        {"who": "narrator", "text": "從前從前，在森林旁邊的小木屋裡，住著一個可愛的小女孩。"},
+        {"who": "narrator", "text": "她總是披著外婆送的紅色斗篷，所以大家都叫她「小紅帽」。", "do": [{"id": "red", "gesture": "shy"}]},
+        {"who": "red", "text": "媽媽，我這就把蛋糕和葡萄酒送去給外婆！", "do": [{"id": "red", "gesture": "explain", "look": -0.35}]},
+        {"who": "narrator", "text": "媽媽叮嚀她：「路上別離開小路，也不要和陌生人說話喔。」", "do": [{"id": "red", "look": -0.25, "nod": true}]}
+      ],
+      "tail": 0.6
+    },
+    {
+      "bg": "forest",
+      "camera": [{"at": 0.0, "x": 1000, "y": 560, "zoom": 1.0}, {"at": 1.0, "x": 2350, "y": 560, "zoom": 1.0}],
+      "actors": [{"id": "red", "x": 650, "y": 945, "look": 0.3}],
+      "beats": [
+        {"who": "narrator", "text": "小紅帽提著籃子，開開心心地走進了森林。", "do": [{"id": "red", "walk_to": 1700}]},
+        {"who": "red", "text": "啦啦啦～外婆收到禮物，一定會很開心！", "do": [{"id": "red", "walk_to": 2650}]}
+      ],
+      "tail": 0.5
+    },
+    {
+      "bg": "forest",
+      "camera": [{"at": 0.0, "x": 1500, "y": 560, "zoom": 1.02}, {"at": 1.0, "x": 1560, "y": 560, "zoom": 1.1}],
+      "actors": [{"id": "red", "x": 1200, "y": 940, "look": 0.2}, {"id": "wolf", "x": 2500, "y": 955, "look": -0.3}],
+      "beats": [
+        {"who": "narrator", "text": "這時候，一隻大野狼從大樹後面走了出來。", "do": [{"id": "wolf", "walk_to": 1870}, {"id": "red", "look": 0.6}]},
+        {"who": "wolf", "text": "嘿嘿，可愛的小姑娘，妳要去哪裡呀？", "do": [{"id": "wolf", "gesture": "sly", "look": -0.6}, {"id": "red", "look": 0.6}]},
+        {"who": "red", "text": "我要去森林的另一頭，探望生病的外婆。", "do": [{"id": "red", "gesture": "explain", "look": 0.55}, {"id": "wolf", "look": -0.55}]}
+      ],
+      "tail": 0.4
+    },
+    {
+      "bg": "meadow",
+      "camera": [{"at": 0.0, "x": 1300, "y": 560, "zoom": 1.0}, {"at": 1.0, "x": 1350, "y": 560, "zoom": 1.06}],
+      "actors": [{"id": "red", "x": 1050, "y": 1010, "look": 0.5}, {"id": "wolf", "x": 1640, "y": 1015, "look": -0.5}],
+      "beats": [
+        {"who": "wolf", "text": "那邊的花開得正漂亮，何不摘一束送給外婆呢？", "do": [{"id": "wolf", "gesture": "point", "look": -0.5}]},
+        {"who": "red", "text": "對耶！外婆一定會喜歡的！", "do": [{"id": "red", "gesture": "happy", "look": 0.2, "nod": true}]},
+        {"who": "narrator", "text": "天真的小紅帽跑去摘花，大野狼卻悄悄地往外婆家跑去了……", "do": [{"id": "red", "walk_to": 520, "look": -0.5}, {"id": "wolf", "walk_to": 2650, "look": 0.6, "speed": 1.8}]}
+      ],
+      "tail": 1.2
+    }
+  ]
+}
