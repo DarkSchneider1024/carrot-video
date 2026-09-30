@@ -8,6 +8,7 @@ import copy
 import numpy as np
 
 import hunter as H
+import hunter_head as HH
 import red_hood as RH
 from girl import Part, hx, M
 from girl_v4 import R, Rell, CX, K, LW, SIDES, ID
@@ -15,6 +16,9 @@ from girl_v4 import R, Rell, CX, K, LW, SIDES, ID
 GOLD, GOLD_SH, GOLD_HI, GOLD_LN = hx('f5c63a'), hx('c2951a'), hx('fff08a'), hx('6a4f08')
 RUBY, SAPPHIRE, EMERALD = hx('d42838'), hx('2a6ed0'), hx('2fa05a')
 ERMINE, ERMINE_SH = hx('fbfaf6'), hx('d9d6cc')
+
+
+HH.patch(H)
 
 
 def cmap(d):
@@ -32,6 +36,7 @@ BELT_MAP = cmap({H.LEATHER: GOLD_SH, H.LEATHER_LN: GOLD_LN, H.BRASS: RUBY})
 DROP = {'獵槍', '背帶', '帽子', '羽毛'}
 
 
+@HH.scaled
 def crown():
     p = Part('王冠')
     base = [(236, 104), (234, 58), (252, 80), (262, 44), (274, 76), (CX, 34), (297, 76), (309, 44), (319, 80),
@@ -53,6 +58,7 @@ def crown():
     return p
 
 
+@HH.scaled
 def top_hair():
     """silver hair on the crown of the head (the hunter's hat used to cover it)"""
     p = Part('頭頂髮')
@@ -62,6 +68,7 @@ def top_hair():
     return p
 
 
+@HH.slim
 def ermine_collar():
     p = Part('披肩毛領')
     for g in (ID, M):
@@ -93,7 +100,7 @@ def fix(p):
 
 def build():
     out = []
-    for name, items in H.build():
+    for name, items in HH.build_slim(H):
         new = []
         for it in items:
             if isinstance(it, tuple):
@@ -123,3 +130,5 @@ RIG['head3d']['layers'].pop('羽毛', None)
 RIG['head3d']['layers']['王冠'] = (1, 10)
 RIG['head3d']['layers']['頭頂髮'] = (1, 4)
 RIG['breath_lift'] = ['外套_R', '外套_L', '領子', '披肩毛領', '上臂_R', '上臂_L']
+HH.rig(RIG)
+HH.rig_body(RIG)

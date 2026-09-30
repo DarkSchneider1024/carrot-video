@@ -8,12 +8,16 @@ import copy
 import numpy as np
 
 import hunter as H
+import hunter_head as HH
 import red_hood as RH
 from girl import Part, hx, M
 from girl_v4 import R, Rell, CX, K, LW, SIDES, ID
 
 GOLD, GOLD_SH, GOLD_HI, GOLD_LN = hx('f5c63a'), hx('c2951a'), hx('fff08a'), hx('6a4f08')
 HAIR, HAIR_SH, HAIR_HI, HAIR_LN = hx('f1c655'), hx('cf9a2c'), hx('fde89a'), hx('6e4a0c')
+
+
+HH.patch(H)
 
 
 def cmap(d):
@@ -32,6 +36,7 @@ NOSE_MAP = cmap({H.NOSE_RED: hx('f0bba0')})
 DROP = {'獵槍', '背帶', '帽子', '羽毛', '鬍子', '八字鬍', '腮紅'}
 
 
+@HH.scaled
 def top_hair():
     """full head of blond hair with side-swept bangs (the hunter's hat used to cover the crown)"""
     p = Part('頭頂髮')
@@ -51,6 +56,7 @@ def top_hair():
     return p
 
 
+@HH.scaled
 def circlet():
     p = Part('王冠')
     base = [(246, 92), (250, 70), (262, 82), (274, 62), (CX, 76), (297, 62), (309, 82), (321, 70), (325, 92),
@@ -65,6 +71,7 @@ def circlet():
     return p
 
 
+@HH.slim
 def gold_trim(p, side):
     f = ID if side == 'R' else M
     p.line(f(R([(262, 318), (254, 350), (254, 400), (258, 470), (266, 540), (270, 600), (268, 646)])), 2.2, GOLD)
@@ -77,6 +84,7 @@ IRIS, IRIS_DK, IRIS_HI = hx('3a7fd0'), hx('1c3f7a'), hx('8fc8ff')
 EYE_Y, EYE_DX, S = 186, 36, 1.35
 
 
+@HH.scaled
 def face():
     """slimmer, younger face with a pointed (V) chin"""
     p = Part('臉')
@@ -90,6 +98,7 @@ def face():
     return p
 
 
+@HH.scaled
 def nose():
     p = Part('鼻子')
     p.line(R([(CX + 2, 200), (CX + 4, 216), (CX, 220)]), 1.3, SKIN_LN)
@@ -97,6 +106,7 @@ def nose():
     return p
 
 
+@HH.scaled
 def eye(side):
     """big anime eye: blue iris with gradient, pupil, two highlights, thick lash line"""
     f = 1 if side == 'R' else -1
@@ -134,6 +144,7 @@ def eye(side):
     return parts
 
 
+@HH.scaled
 def brows():
     out = []
     for side, f in SIDES:
@@ -170,7 +181,7 @@ def fix(p):
 
 def build():
     out = []
-    for name, items in H.build():
+    for name, items in HH.build_slim(H):
         new = []
         for it in items:
             if isinstance(it, tuple):
@@ -208,3 +219,5 @@ RIG['head3d']['layers']['頭頂髮'] = (1, 6)
 RIG['breath_lift'] = ['外套_R', '外套_L', '領子', '上臂_R', '上臂_L']
 RIG['eyes'] = {'R': (CX - EYE_DX, EYE_Y), 'L': (CX + EYE_DX, EYE_Y)}
 RIG['lower_lid_dy'], RIG['blink_drop'] = 12, 27
+HH.rig(RIG)
+HH.rig_body(RIG)
