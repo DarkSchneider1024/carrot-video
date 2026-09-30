@@ -10,10 +10,13 @@
 **Carrot Studio** 是一套以 AI 驅動的影片自動生成管線，特別針對 YouTube 童話故事短片製作。  
 只需提供故事劇本 JSON，系統即可自動完成：
 
-1. 🎙️ **深度神經網路語音合成** — 100% 採用 **Google Colab GPT-SoVITS** 零樣本真人音色複製（完全廢棄原生 Edge-TTS）
-2. 💬 **AutoSubs 自動字幕** — Whisper 語音辨識 + 動態字幕分段燒錄（嚴格 ≤16 字）
-3. 🎨 **AI 背景與角色圖片** — 自動生成加粗黑框防誤切 Sticker Sprite
-4. 🎬 **FFmpeg 1080p 影片壓製** — 完整故事 MP4 一鍵輸出
+1. 🎨 **Live2D / Inochi2D 角色**：用 Python 筆刷畫出分層 PSD，再綁成 Inochi2D 骨架（九軸轉頭、眨眼、對嘴、手勢）
+2. 🎙️ **Gemini 3.8 Flash TTS 配音**：每個角色一個聲音與語氣指示；旁白是卡洛兒姐姐（Aoede）
+3. 💬 **字幕**：依配音時間自動分段燒錄（每段 ≤16 字）
+4. 🎬 **WebGL 舞台 + FFmpeg**：多層視差背景、鏡頭運動、走路，輸出 1080p MP4
+
+完整流程見 [`live2d/README.md`](live2d/README.md)，頻道成片（片頭、片名卡、正片、卡洛兒姐姐結語、片尾）見
+`carrot-entertainment/.claude/skills/carrot-story-video-pipeline/SKILL.md`。
 
 ---
 
@@ -23,23 +26,19 @@
 |------|------|
 | 前端框架 | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/) |
 | 3D 渲染 | [Three.js](https://threejs.org/) |
-| 語音模型 | [Google Colab GPT-SoVITS](https://colab.research.google.com/drive/1zcn_jg7OGypbi9Te5PZeInJc4s--Ok5G?hl=zh-tw) (100% 真人音色複製) |
+| 語音模型 | Gemini 3.8 Flash TTS（`gemini-3.8-flash-tts`，金鑰讀 `.env` 的 `GEMINI_API_KEY`） |
+| 角色動畫 | Inochi2D（自寫 WebGL 播放器）+ Playwright 渲染 |
 | 字幕生成 | [tmoroney/auto-subs](https://github.com/tmoroney/auto-subs) + [OpenAI Whisper](https://github.com/openai/whisper) |
 | 影片壓製 | [FFmpeg](https://ffmpeg.org/) |
 | AI 代理協議 | [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) |
 
 ---
 
-## 🌟 核心語音架構：Google Colab GPT-SoVITS 深度學習語音複製
+## 🌟 語音：Gemini 3.8 Flash TTS
 
-本專案已**全面廢棄原生的 Edge-TTS**，改採基於 [Google Colab GPT-SoVITS 訓練筆記本](https://colab.research.google.com/drive/1zcn_jg7OGypbi9Te5PZeInJc4s--Ok5G?hl=zh-tw) 的 100% 高保真零樣本語音推理：
-
-- **訓練與推理解耦**：利用 Google Colab GPU 執行大模型推理，透過 API / Localtunnel 傳回音訊
-- **專屬音色**：支援林志玲（林志琳）等專屬真人聲線，包含呼吸與語調起伏
-- **快速切換端點**：
-  ```powershell
-  python scripts/set_colab_endpoint.py --url https://your-colab-tunnel.loca.lt
-  ```
+- 劇本 `voices` 裡寫 `"engine": "gemini"`、`voice`（例如 Aoede、Leda、Puck）和 `style`（中文語氣指示）。
+- 同一個聲音的台詞會合併成一次請求再切開（免費額度一天約 10 次請求），結果依文字雜湊快取在故事資料夾的 `voice/`。
+- 舊的 Google Colab GPT-SoVITS（林志琳聲線）已不再用於正式影片，相關腳本只保留在 `scripts/` 備查。
 
 ---
 
@@ -72,13 +71,10 @@ python scripts/mcp_pipeline_api_server.py
 
 ## 🎬 一鍵生成童話影片
 
-修改 `.agents/skills/fairytale_video_generator/examples/sample_story.json` 填入故事劇本，然後執行：
-
-```powershell
-& "C:\Users\gueiw\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe" `
-  .agents/skills/fairytale_video_generator/scripts/render_fairytale_video.py `
-  --script .agents/skills/fairytale_video_generator/examples/sample_story.json `
-  --output "C:\GitRoot\CarrotStudio\carrot-video\北風與太陽\video\北風與太陽_1080p.mp4"
+```bash
+python live2d/make_video.py 青蛙王子/story_frog.json --no-render   # 只做配音和時間軸（檢查長度）
+python live2d/make_video.py 青蛙王子/story_frog.json --frames "5s,60s"   # 抽幾格檢查
+python live2d/make_video.py 青蛙王子/story_frog.json               # 完整輸出到 青蛙王子/video/
 ```
 
 ---
@@ -112,19 +108,11 @@ carrot-video/
 │   ├── mcp_pipeline_api_server.py    # REST API Server（Port 9880）
 │   ├── auto_subs_whisper.py          # auto-subs Whisper 字幕生成
 │   └── gpt_sovits_server.py          # GPT-SoVITS 語音克隆伺服器
-├── .agents/
-│   └── skills/
-│       └── fairytale_video_generator/
-│           ├── SKILL.md              # AI Agent Skill 規範
-│           ├── scripts/
-│           │   └── render_fairytale_video.py  # 無頭影片生成引擎
-│           └── examples/
-│               └── sample_story.json          # 故事劇本範例
+├── live2d/                  # Live2D 動畫管線（角色、骨架、背景、舞台、make_video.py）
 ├── public/
-│   └── assets/              # 背景圖與角色素材
-└── 北風與太陽/
-    ├── video/               # 生成的影片輸出
-    └── doc/                 # 影片生成規格文件
+│   └── assets/              # 前端用的背景圖與角色素材
+├── 小紅帽/                   # 故事資料夾：劇本、角色、背景、配音快取、video/
+└── 青蛙王子/
 ```
 
 ---
