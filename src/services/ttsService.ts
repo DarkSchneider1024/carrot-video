@@ -1,4 +1,4 @@
-// Web Speech API, GPT-SoVITS, & Edge-TTS Voice Player Service
+// Web Speech API & Edge-TTS Voice Player Service
 
 export interface RealisticVoiceOption {
   id: string;
@@ -9,21 +9,9 @@ export interface RealisticVoiceOption {
   defaultRate: number;
   sampleText: string;
   audioSampleUrl?: string;
-  gptSovitsUrl?: string;
 }
 
 export const ULTRA_REALISTIC_VOICES: RealisticVoiceOption[] = [
-  {
-    id: 'vits-custom-female-ownwts6r7hq',
-    displayName: '🎤【GPT-SoVITS 100% 複製女聲】(YouTube OWnWts6r7HQ API)',
-    gender: 'female',
-    lang: 'zh-TW',
-    defaultPitch: 1.35,
-    defaultRate: 1.0,
-    sampleText: '你好！我是 GPT-SoVITS 複製原聲女主角！',
-    audioSampleUrl: '/assets/vits_female_real.mp3',
-    gptSovitsUrl: 'http://localhost:9880/tts'
-  },
   {
     id: 'zh-TW-HsiaoChenNeural',
     displayName: '👩 曉臻 (台灣溫柔女聲 - 故事朗讀推薦)',
@@ -35,7 +23,7 @@ export const ULTRA_REALISTIC_VOICES: RealisticVoiceOption[] = [
   },
   {
     id: 'zh-TW-YunJheNeural',
-    displayName: '👨 雲哲 (台灣沉穩低音男聲 - 獵人與北風推薦)',
+    displayName: '👨 雲哲 (台灣沉穩低音男聲 - 獵人推薦)',
     gender: 'male',
     lang: 'zh-TW',
     defaultPitch: 0.50, // Ultra Deep Male
@@ -131,7 +119,7 @@ export const getAvailableVoices = (): Promise<SpeechSynthesisVoice[]> => {
 
 export const speakText = async (
   text: string,
-  voiceId: string = 'vits-custom-female-ownwts6r7hq',
+  voiceId: string = 'zh-TW-HsiaoChenNeural',
   overrideRate?: number,
   overridePitch?: number
 ): Promise<void> => {
@@ -139,36 +127,6 @@ export const speakText = async (
   stopSpeaking();
 
   const voicePreset = ULTRA_REALISTIC_VOICES.find((v) => v.id === voiceId) || ULTRA_REALISTIC_VOICES[0];
-
-  // Attempt GPT-SoVITS local voice cloning API server first
-  if (voicePreset.gptSovitsUrl) {
-    try {
-      const url = `${voicePreset.gptSovitsUrl}?text=${encodeURIComponent(text)}`;
-      const res = await fetch(url, { method: 'GET' });
-      if (res.ok) {
-        const blob = await res.blob();
-        const audioUrl = URL.createObjectURL(blob);
-        return new Promise((resolve) => {
-          const audio = new Audio(audioUrl);
-          currentActiveAudio = audio;
-          audio.onended = () => {
-            currentActiveAudio = null;
-            resolve();
-          };
-          audio.onerror = () => {
-            currentActiveAudio = null;
-            resolve();
-          };
-          audio.play().catch(() => {
-            currentActiveAudio = null;
-            resolve();
-          });
-        });
-      }
-    } catch (err) {
-      console.log('GPT-SoVITS API server offline, falling back to speech synthesis...');
-    }
-  }
 
   if (!('speechSynthesis' in window)) {
     console.warn('Web Speech API is not supported in this browser.');

@@ -37,7 +37,7 @@ export const App: React.FC = () => {
             </div>
             <h2 className="text-2xl font-bold text-white">前端介面已移出，核心轉化為標準 MCP REST/RPC API</h2>
             <p className="text-sm text-slate-300 leading-relaxed max-w-3xl">
-              所有影片生成、GPT-SoVITS 語音複製、AutoSubs 自動字幕與 1080p MP4 FFmpeg 壓製流程現已全數封裝為獨立 API 與 MCP 工具（Model Context Protocol），可直接與 LLM Agent / AI 助手對接！
+              所有影片生成、AutoSubs 自動字幕與 1080p MP4 FFmpeg 壓製流程現已全數封裝為獨立 API 與 MCP 工具（Model Context Protocol），可直接與 LLM Agent / AI 助手對接！
             </p>
           </div>
         </div>
@@ -49,7 +49,7 @@ export const App: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 font-bold text-sm text-amber-300">
                 <Volume2 className="w-4 h-4 text-amber-400" />
-                語音合成 API (GPT-SoVITS / Edge-TTS)
+                語音合成 API (Edge-TTS)
               </div>
               <span className="text-[10px] font-mono bg-purple-950 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30">POST</span>
             </div>

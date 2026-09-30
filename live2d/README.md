@@ -39,7 +39,7 @@ python live2d/make_video.py 小紅帽/story_live2d.json --frames 900:901   # 只
 
 ## 劇本格式（`story_live2d.json`）
 
-- `voices`：每個說話者的 edge-tts 聲音、語速和音高。之後換成 GPT-SoVITS 只要改 `make_video.synth()`。
+- `voices`：每個說話者的聲音。`"engine": "gemini"` 用 Gemini 3.8 Flash TTS（`voice` + 中文語氣 `style`），否則用 edge-tts（聲音、語速、音高）。
 - `cast`：角色 id 對應到哪個骨架，以及畫面上的身高（px）。
 - `scenes[]`：每一幕包含以下欄位。
   - `bg`：背景名稱。

@@ -38,7 +38,6 @@
 
 - 劇本 `voices` 裡寫 `"engine": "gemini"`、`voice`（例如 Aoede、Leda、Puck）和 `style`（中文語氣指示）。
 - 同一個聲音的台詞會合併成一次請求再切開（免費額度一天約 10 次請求），結果依文字雜湊快取在故事資料夾的 `voice/`。
-- 舊的 Google Colab GPT-SoVITS（林志琳聲線）已不再用於正式影片，相關腳本只保留在 `scripts/` 備查。
 
 ---
 
@@ -96,9 +95,7 @@ python live2d/make_video.py 青蛙王子/story_frog.json               # 完整�
 carrot-video/
 ├── src/
 │   ├── components/          # React UI 元件
-│   │   ├── DicebearStudio.tsx        # 角色動畫工作室
 │   │   ├── Img2ThreeJSStudio.tsx     # 圖片轉 Three.js（img2threejs 整合）
-│   │   ├── RealImg2ThreeJSStudio.tsx # 真實圖片 3D 場景
 │   │   ├── Full3DModelStudio.tsx     # 完整 3D 模型工作室
 │   │   └── VisualStudioPlayer.tsx    # 影片預覽播放器
 │   └── services/
@@ -106,8 +103,7 @@ carrot-video/
 ├── scripts/
 │   ├── mcp_server.py                 # MCP JSON-RPC 2.0 Stdio Server
 │   ├── mcp_pipeline_api_server.py    # REST API Server（Port 9880）
-│   ├── auto_subs_whisper.py          # auto-subs Whisper 字幕生成
-│   └── gpt_sovits_server.py          # GPT-SoVITS 語音克隆伺服器
+│   └── auto_subs_whisper.py          # auto-subs Whisper 字幕生成
 ├── live2d/                  # Live2D 動畫管線（角色、骨架、背景、舞台、make_video.py）
 ├── public/
 │   └── assets/              # 前端用的背景圖與角色素材
