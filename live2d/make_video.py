@@ -13,7 +13,7 @@ Steps
   4. render : headless Chromium (Playwright) loads live2d/player/render.html, which draws backgrounds +
               puppets with the WebGL stage; frames are piped to FFmpeg
   5. mux    : audio clips placed at their start times, subtitles (ASS, <= 16 chars per cue) burned in
-The Colab GPT-SoVITS voice can replace edge-tts later: only step 1 changes (see synth()).
+Voices: Gemini 3.8 Flash TTS for "engine": "gemini" voices, edge-tts otherwise (see synth()).
 """
 import argparse, asyncio, base64, hashlib, http.server, json, math, os, re, socketserver, subprocess, sys, threading, wave
 import numpy as np
@@ -372,19 +372,124 @@ def mouth_envelope(samples, sr, fps):
 
 
 # ------------------------------------------------------------------ 3. timeline + subtitles
-def split_subs(text, t0, dur, max_chars=16, gap=0.12):
-    parts = [p for p in re.split(r'(?<=[，。！？、；：…～」])', text) if p.strip()]
-    chunks = []
-    for p in parts:
-        while len(p) > max_chars:
-            chunks.append(p[:max_chars]); p = p[max_chars:]
-        if p:
-            chunks.append(p)
-    total = sum(len(c) for c in chunks)
+# ------------------------------------------------------------------ subtitles (繁中字幕業界慣例，參考 Netflix zh-Hant)
+#  * 一條字幕一行、最多 16 字；只在「詞與詞之間」斷行（jieba 斷詞），《書名》「引號」內容不拆
+#  * 太長的子句平均切成幾段（不會剩一兩個字的尾巴）；太短的子句併進同一條
+#  * 標點：逗號、頓號、分號、冒號 → 全形空格；句號刪除；？！……～ 保留；行首行尾不留標點/空格
+#  * 每條至少 0.8 秒；時間依字數比例分配
+SUB_MAX = 16
+SUB_WORDS = ['卡洛兒姐姐', '卡洛特', '小紅帽', '大野狼', '青蛙王子', '小青蛙', '小公主', '好朋友', '守信用', '金球']
+_PAUSE = '，、；：,;:'
+_STOP = '。.'
+_KEEP_END = '？！?!…～~'
+_jieba = None
+
+
+def _words(text):
+    global _jieba
+    if _jieba is None:
+        try:
+            import jieba
+            jieba.setLogLevel(60)
+            for w in SUB_WORDS:
+                jieba.add_word(w)
+            _jieba = jieba
+        except ImportError:
+            _jieba = False
+    toks = _jieba.lcut(text) if _jieba else list(text)
+    out, depth = [], 0                                       # glue 《…》 / 「…」 into single unbreakable tokens
+    for t in toks:
+        if depth and out:
+            out[-1] += t
+        else:
+            out.append(t)
+        depth += sum(t.count(c) for c in '《「『') - sum(t.count(c) for c in '》」』')
+        depth = max(depth, 0)
+    return out
+
+
+def _clauses(text):
+    """[(clause text, trailing punctuation)]"""
+    out, cur = [], ''
+    for ch in text:
+        if ch in _PAUSE + _STOP + _KEEP_END:
+            if out and not cur.strip():
+                out[-1] = (out[-1][0], out[-1][1] + ch)
+            else:
+                out.append((cur.strip(), ch))
+            cur = ''
+        else:
+            cur += ch
+    if cur.strip():
+        out.append((cur.strip(), ''))
+    return out
+
+
+def _balanced(clause):
+    """split a clause longer than SUB_MAX into k even pieces at word boundaries"""
+    n = len(clause)
+    if n <= SUB_MAX:
+        return [clause]
+    k = math.ceil(n / SUB_MAX)
+    words = _words(clause)
+    bounds, acc = [], 0
+    for w in words[:-1]:
+        acc += len(w)
+        bounds.append(acc)
+    cuts, prev = [], 0
+    for i in range(1, k):
+        target = n * i / k
+        cand = [b for b in bounds if prev < b < n and b - prev <= SUB_MAX and n - b <= SUB_MAX * (k - i)]
+        if not cand:
+            cand = [b for b in bounds if b > prev] or [min(prev + SUB_MAX, n - 1)]
+        b = min(cand, key=lambda x: abs(x - target))
+        cuts.append(b); prev = b
+    edges = [0] + cuts + [n]
+    return [clause[a:b] for a, b in zip(edges, edges[1:]) if clause[a:b]]
+
+
+def _punct(p):
+    """how a clause's trailing punctuation is shown inside a subtitle"""
+    shown = ''.join(c for c in p if c in _KEEP_END)
+    return shown.replace('...', '…').replace('~', '～')
+
+
+def sub_lines(text):
+    events, cur = [], ''
+    text = text.replace('——', '，').replace('—', '，')          # dash = a pause (break point)
+    for body, p in _clauses(text):
+        tail = _punct(p)
+        for k, piece in enumerate(_balanced(body)):
+            last = k == len(_balanced(body)) - 1
+            piece = piece + (tail if last else '')
+            sep = '' if not cur else ('' if cur.endswith(tuple(_KEEP_END)) else '　')
+            if cur and len(cur) + len(sep) + len(piece) <= SUB_MAX:
+                cur = cur + sep + piece
+            else:
+                if cur:
+                    events.append(cur)
+                cur = piece
+            if last and (any(c in p for c in _STOP + _KEEP_END)) and len(cur) >= SUB_MAX // 2:
+                events.append(cur); cur = ''                # sentence end closes a reasonably full subtitle
+    if cur:
+        events.append(cur)
+    return [e.strip('　 ') for e in events if e.strip('　 ')]
+
+
+def split_subs(text, t0, dur, max_chars=SUB_MAX, gap=0.12, min_dur=0.8):
+    chunks = sub_lines(text)
+    weight = [len(c.replace('　', '')) + (0.8 if '　' in c else 0) for c in chunks]
+    total = sum(weight) or 1
+    durs = [dur * w / total for w in weight]
+    if len(durs) > 1:                                        # enforce the minimum on-screen time
+        short = [i for i, d in enumerate(durs) if d < min_dur]
+        need = sum(min_dur - durs[i] for i in short)
+        pool = sum(durs[i] - min_dur for i in range(len(durs)) if i not in short)
+        if short and pool > need:
+            durs = [min_dur if i in short else d - (d - min_dur) * need / pool for i, d in enumerate(durs)]
     t, out = t0, []
-    for c in chunks:
-        d = dur * len(c) / total
-        out.append((t, t + max(0.3, d - gap), c.strip('「」 ')))
+    for c, d in zip(chunks, durs):
+        out.append((t, t + max(0.3, d - gap), c))
         t += d
     return out
 
@@ -650,6 +755,8 @@ def main():
     ap.add_argument('story')
     ap.add_argument('--no-render', action='store_true')
     ap.add_argument('--frames', help='a:b  render only this frame range to <story dir>/_frames/')
+    ap.add_argument('--remux', action='store_true',
+                    help='reuse video/_video_silent*.mp4 from the last render: only rebuild subtitles + audio')
     a = ap.parse_args()
     story_path = os.path.abspath(a.story)
     story_dir = os.path.dirname(story_path)
@@ -677,10 +784,10 @@ def main():
     vdir = os.path.join(story_dir, 'video')
     os.makedirs(vdir, exist_ok=True)
     silent = os.path.join(vdir, f'_video_silent{suffix}.mp4')
-    render(rel, silent, tl['fps'], n, None, tuple(story['size']))
+    if not (a.remux and os.path.exists(silent)):
+        render(rel, silent, tl['fps'], n, None, tuple(story['size']))
     out = os.path.join(vdir, story.get('output', 'little_red_riding_hood_live2d.mp4'))
-    mux(silent, tl, ass, out)
-    os.remove(silent)
+    mux(silent, tl, ass, out)                     # the silent render is kept for --remux (mp4s are not in git)
     print('done ->', out)
 
 
