@@ -10,9 +10,9 @@
 **Carrot Studio** 是一套以 AI 驅動的影片自動生成管線，特別針對 YouTube 童話故事短片製作。  
 只需提供故事劇本 JSON，系統即可自動完成：
 
-1. 🎙️ **AI 語音合成** — Edge-TTS / GPT-SoVITS 生成中文配音
-2. 💬 **AutoSubs 自動字幕** — Whisper 語音辨識 + 動態字幕分段燒錄
-3. 🎨 **AI 背景與角色圖片** — 自動生成或使用現有素材
+1. 🎙️ **深度神經網路語音合成** — 100% 採用 **Google Colab GPT-SoVITS** 零樣本真人音色複製（完全廢棄原生 Edge-TTS）
+2. 💬 **AutoSubs 自動字幕** — Whisper 語音辨識 + 動態字幕分段燒錄（嚴格 ≤16 字）
+3. 🎨 **AI 背景與角色圖片** — 自動生成加粗黑框防誤切 Sticker Sprite
 4. 🎬 **FFmpeg 1080p 影片壓製** — 完整故事 MP4 一鍵輸出
 
 ---
@@ -23,45 +23,23 @@
 |------|------|
 | 前端框架 | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/) |
 | 3D 渲染 | [Three.js](https://threejs.org/) |
-| 語音合成 | [edge-tts](https://github.com/rany2/edge-tts) |
+| 語音模型 | [Google Colab GPT-SoVITS](https://colab.research.google.com/drive/1zcn_jg7OGypbi9Te5PZeInJc4s--Ok5G?hl=zh-tw) (100% 真人音色複製) |
 | 字幕生成 | [tmoroney/auto-subs](https://github.com/tmoroney/auto-subs) + [OpenAI Whisper](https://github.com/openai/whisper) |
 | 影片壓製 | [FFmpeg](https://ffmpeg.org/) |
 | AI 代理協議 | [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) |
 
 ---
 
-## 🌟 引用的開源專案
+## 🌟 核心語音架構：Google Colab GPT-SoVITS 深度學習語音複製
 
-### 🔤 [tmoroney/auto-subs](https://github.com/tmoroney/auto-subs)
-> **本地端自動字幕生成工具**，支援 DaVinci Resolve、Premiere Pro 與 After Effects。
+本專案已**全面廢棄原生的 Edge-TTS**，改採基於 [Google Colab GPT-SoVITS 訓練筆記本](https://colab.research.google.com/drive/1zcn_jg7OGypbi9Te5PZeInJc4s--Ok5G?hl=zh-tw) 的 100% 高保真零樣本語音推理：
 
-本專案借鑒 auto-subs 的核心設計理念：
-- 以 **OpenAI Whisper** 進行本地端語音辨識，生成精確時間戳 SRT 字幕
-- 字幕**自動分段切分**（每段最多 16 字），逐句動態出現於畫面
-- 高對比度硬字幕燒錄（黃色字體、黑色描邊 4px、深色藥丸背景）
-- 整合到 `scripts/auto_subs_whisper.py` 與 MCP Pipeline API
-
-### 🌲 [image-to-3d / img2threejs](https://github.com/nicktarnold/img2threejs)
-> **圖片轉 Three.js 3D 場景工具**，將 2D 靜態圖片轉換為可操控的 3D 視覺效果。
-
-本專案整合於：
-- `src/components/Img2ThreeJSStudio.tsx` — 圖片轉 Three.js 3D 空間映射
-- `src/components/RealImg2ThreeJSStudio.tsx` — 搭配真實圖片輸入的進階 3D 場景
-- `src/components/Full3DModelStudio.tsx` — 完整 3D 模型場景工作室
-
-### ⚡ [Vite](https://vitejs.dev/)
-> **極速前端建置工具**，原生 ESM 模組 + HMR 熱更新。
-
-- 使用 [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)（Oxc 編譯器）
-- 開發模式：`npm run dev`
-- 生產建置：`npm run build`
-
-### 🗣️ [rany2/edge-tts](https://github.com/rany2/edge-tts)
-> **微軟 Edge TTS 非官方 Python 客戶端**，支援多語言神經網路語音。
-
-本專案使用以下語音模型：
-- `zh-TW-HsiaoYuNeural` — 台灣女聲（小玉）
-- `zh-TW-YunJheNeural` — 台灣男聲（雲哲）
+- **訓練與推理解耦**：利用 Google Colab GPU 執行大模型推理，透過 API / Localtunnel 傳回音訊
+- **專屬音色**：支援林志玲（林志琳）等專屬真人聲線，包含呼吸與語調起伏
+- **快速切換端點**：
+  ```powershell
+  python scripts/set_colab_endpoint.py --url https://your-colab-tunnel.loca.lt
+  ```
 
 ---
 

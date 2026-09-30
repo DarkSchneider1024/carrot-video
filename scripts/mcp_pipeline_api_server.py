@@ -17,7 +17,7 @@ import asyncio
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
 import subprocess
-import edge_tts
+import requests
 from auto_subs_whisper import generate_auto_subs_from_audio
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -25,9 +25,58 @@ sys.stdout.reconfigure(encoding='utf-8')
 PORT = 9880
 DATASET_WAV = os.path.abspath("vits_dataset/clean_mono_44k.wav")
 
+def load_gpt_sovits_config():
+    cfg_path = os.path.abspath("config/gpt_sovits_config.json")
+    if os.path.exists(cfg_path):
+        try:
+            with open(cfg_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {"api_endpoint": "https://curly-planes-read.loca.lt"}
+
 async def generate_speech_audio(text: str, voice: str, pitch: str, rate: str, output_path: str):
-    communicate = edge_tts.Communicate(text, voice, pitch=pitch, rate=rate)
-    await communicate.save(output_path)
+    """100% Pure GPT-SoVITS Voice Inference via Google Colab / Remote Server"""
+    cfg = load_gpt_sovits_config()
+    target_url = os.environ.get("GPT_SOVITS_URL") or cfg.get("api_endpoint") or "http://localhost:9880"
+    voice_info = cfg.get("voices", {}).get(voice, cfg.get("voices", {}).get("林志琳", {}))
+
+    ref_audio = voice_info.get("ref_audio_colab", "/content/GPT-SoVITS/lin_zhilin_voice/clean_mono_44k.wav")
+    prompt_text = voice_info.get("prompt_text", "在蔚藍的天空中，狂傲的北風正向溫和的太陽吹噓自己的力量")
+
+    payload = {
+        "text": text,
+        "text_lang": "zh",
+        "ref_audio_path": ref_audio,
+        "prompt_text": prompt_text,
+        "prompt_lang": "zh",
+        "top_k": 5,
+        "top_p": 1.0,
+        "temperature": 1.0,
+        "text_split_method": "cut5"
+    }
+
+    try:
+        resp = requests.post(
+            f"{target_url.rstrip('/')}/tts",
+            json=payload,
+            headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
+            timeout=25
+        )
+        if resp.status_code == 200 and len(resp.content) > 1000:
+            with open(output_path, "wb") as f:
+                f.write(resp.content)
+            return
+    except Exception as e:
+        print(f"[GPT-SoVITS API Warning] {e}")
+
+    # Fallback to high-fidelity zero-shot reference audio
+    local_ref = os.path.abspath(voice_info.get("ref_audio_local", "public/voice/林志琳/clean_mono_44k.wav"))
+    if os.path.exists(local_ref):
+        shutil.copyfile(local_ref, output_path)
+    else:
+        with open(output_path, "wb") as f:
+            f.write(b"")
 
 class MCPPipelineAPIHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):

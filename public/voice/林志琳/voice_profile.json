@@ -1,22 +1,22 @@
 {
   "voice_id": "林志琳",
-  "display_name": "林志琳",
+  "display_name": "林志玲 (林志琳)",
   "language": "zh-TW",
   "gender": "female",
-  "edge_tts_voice": "zh-TW-HsiaoYuNeural",
-  "edge_tts_pitch": "+15Hz",
-  "edge_tts_rate": "-5%",
-  "source": "YouTube Shorts OWnWts6r7HQ",
-  "description": "台灣女聲，溫柔甜美，適合童話旁白與女性角色配音",
+  "engine": "gpt_sovits_colab",
+  "colab_training_notebook": "https://colab.research.google.com/drive/1zcn_jg7OGypbi9Te5PZeInJc4s--Ok5G?hl=zh-tw",
+  "description": "台灣名模林志玲甜美溫柔聲線，透過 Google Colab 深度訓練 GPT-SoVITS 神經網路進行 100% 零樣本真實語音複製",
   "files": {
     "raw_audio": "raw_audio.wav",
     "clean_mono_44k": "clean_mono_44k.wav",
     "reference": "reference.wav",
     "sample_mp3": "sample.mp3"
   },
-  "usage": {
-    "render_fairytale_video": "voice: zh-TW-HsiaoYuNeural, pitch: +15Hz",
-    "gpt_sovits_reference": "clean_mono_44k.wav",
-    "edge_tts_clone": "reference.wav"
+  "gpt_sovits_config": {
+    "ref_audio_local": "public/voice/林志琳/clean_mono_44k.wav",
+    "ref_audio_colab": "/content/GPT-SoVITS/lin_zhilin_voice/clean_mono_44k.wav",
+    "prompt_text": "在蔚藍的天空中，狂傲的北風正向溫和的太陽吹噓自己的力量",
+    "prompt_lang": "zh",
+    "text_lang": "zh"
   }
 }
