@@ -82,3 +82,7 @@ _frames/
 _*_log.txt
 *_batch_rejected*.wav
 classic_update.zip
+
+# 換掉的錯位配音（保留備查，不進 git）
+*.mp3.bad
+_voice_check*

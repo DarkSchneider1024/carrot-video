@@ -590,6 +590,7 @@ def build_timeline(story, story_dir):
             if a.get('hidden'):                  # starts invisible; a later "fade_in" makes it appear
                 actors[a['id']]['fades'].append({'t': 1e9, 'dur': 0.6, 'in': True})
         overlays = []
+        ball_events = []
         if sc.get('card'):
             overlays.append({'type': 'card', 't0': round(s0 + 0.2, 3), 't1': round(s0 + 4.0, 3), 'text': sc['card']})
         for bi, beat in enumerate(sc['beats']):
@@ -654,6 +655,16 @@ def build_timeline(story, story_dir):
                     a['exprs'].append({'t': round(t + d.get('at', 0.0), 3), 'v': d['expr']})
                 if d.get('fade_out'):
                     a['fades'].append({'t': round(t + d.get('at', 0.0), 3), 'dur': d.get('fade_dur', 0.8)})
+                if 'ball' in d:                       # golden-ball prop (青蛙王子): toss / pass / roll_to / hold / hide
+                    b = d['ball'] if isinstance(d['ball'], dict) else {'mode': d['ball']}
+                    t0 = round(t + d.get('at', b.get('at', 0.0)), 3)
+                    ev = {'mode': b.get('mode', 'pass' if 'pass' in b else 'roll' if 'roll_to' in b else 'hold'),
+                          'actor': d['id'], 't0': t0, 't1': round(t0 + b.get('dur', dur), 3)}
+                    if 'pass' in b:
+                        ev['to'] = b['pass']
+                    if 'roll_to' in b:
+                        ev['x'], ev['y'] = b['roll_to']
+                    ball_events.append(ev)
             t += dur + gap + beat.get('pause', 0.0)
         t += sc.get('tail', 0.5)
         if sc.get('title_card'):                  # story title shown over the whole scene (after the channel intro)
@@ -662,7 +673,8 @@ def build_timeline(story, story_dir):
             overlays.append({'type': 'title', 't0': round(t - 3.0, 3), 't1': round(t + 0.2, 3), 'text': sc['end_card']})
         scenes.append({'bg': sc['bg'], 't0': round(s0, 3), 't1': round(t, 3), 'camera': sc['camera'],
                        'actors': list(actors.values()), 'overlays': overlays, 'light': sc.get('light'),
-                       'props': sc.get('props', [])})
+                       'props': sc.get('props', []),
+                       'ball': {'holder': sc['ball'].get('holder'), 'events': ball_events} if sc.get('ball') else None})
     return {'fps': fps, 'size': story['size'], 'duration': round(t + 0.2, 3), 'scenes': scenes, 'clips': clips,
             'subs': [{'t0': round(a, 3), 't1': round(b, 3), 'text': c, 'who': w} for a, b, c, w in subs]}
 

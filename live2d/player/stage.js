@@ -282,10 +282,14 @@ class Actor {
     const talk = Math.max(talk0, eat * (0.35 + 0.35 * Math.sin((t - this.t0) * 11)));
     const shake = this.within(this.s.shakes, t, 0.08);
     this.y = this.yAt(t);
-    this.opacity = 1;
-    for (const f of this.s.fades || []) {
+    // fades in time order: the latest started fade decides (a later fade_in must not hide the actor before it);
+    // an actor whose first fade is a fade_in starts invisible ("hidden")
+    const fades = [...(this.s.fades || [])].sort((m, n) => m.t - n.t);
+    this.opacity = fades.length && fades[0].in ? 0 : 1;
+    for (const f of fades) {
+      if (t < f.t) break;
       const u = clamp((t - f.t) / f.dur, 0, 1);
-      this.opacity = Math.min(this.opacity, f.in ? u : 1 - u);   // fade_in: invisible until f.t, then appears
+      this.opacity = f.in ? u : 1 - u;
     }
     const g = this.gesture(t);
 
@@ -505,6 +509,8 @@ export class Stage {
         if (a.holdPhone && a.sideW < 0.5) phoneAt(a.p, k, sx, oy);
         const hPos = partPos(a.p, '手指_L', k, k, sx, oy) || partPos(a.p, '手掌_L', k, k, sx, oy);
         if (hPos) this.screen[a.s.id].handL = hPos;
+        const hR = partPos(a.p, '手指_R', k, k, sx, oy) || partPos(a.p, '手掌_R', k, k, sx, oy);
+        if (hR) this.screen[a.s.id].handR = hR;
       };
       const drawSide = (only) => {             // profile puppet, mirrored when walking left
         const P = this.puppets[a.s.side];
@@ -542,12 +548,13 @@ export class Stage {
   drawUI(sc, t, toScreen, z) {
     const ov = sc.overlays || [], props = sc.props || [], light = sc.light;
     const hasFlower = this.actors.some((a) => a.s.flower);
-    if (!ov.length && !props.length && !light && !hasFlower) return;
+    if (!ov.length && !props.length && !light && !hasFlower && !sc.ball) return;
     if (!this.ui) { this.ui = Object.assign(document.createElement('canvas'), { width: W, height: H }); this.uiCtx = this.ui.getContext('2d'); }
     const c = this.uiCtx;
     c.clearRect(0, 0, W, H);
     if (light) this.uiLight(c, light, t);
     for (const p of props) if (p.type === 'steam') this.uiSteam(c, toScreen(p.x, p.y), t, z);
+    if (sc.ball) this.uiBall(c, sc.ball, t, toScreen, z);
     for (const a of this.actors) {
       if (a.s.flower && this.screen[a.s.id]) {
         const who = this.screen[a.s.id];
@@ -763,6 +770,64 @@ export class Stage {
       c.fillStyle = g3; c.beginPath(); c.arc(0, 0, h * 0.4, 0, Math.PI * 2); c.fill(); c.restore();
       c.fillStyle = 'rgba(255,255,240,0.9)'; c.beginPath(); c.arc(hx, hy, 5, 0, Math.PI * 2); c.fill();   // the phone light
     } else c.drawImage(this.dark, 0, 0);
+  }
+
+  // golden ball (青蛙王子): held in an actor's right hand, tossed up and caught, passed between two actors,
+  // rolled into the well; it follows the hand every frame, so gestures move it too
+  uiBall(c, B, t, toScreen, z) {
+    const r = 26 * z;
+    const hand = (id) => {
+      const s = this.screen[id];
+      return s && s.handR ? [s.handR[0], s.handR[1] - r * 0.55] : null;
+    };
+    const arc = (p, q, u, hgt) => [p[0] + (q[0] - p[0]) * u, p[1] + (q[1] - p[1]) * u - 4 * hgt * u * (1 - u)];
+    let holder = B.holder, pos = null, visible = !!holder, spin = t * 2;
+    for (const e of [...(B.events || [])].sort((m, n) => m.t0 - n.t0)) {
+      if (t < e.t0) break;
+      const live = t <= e.t1, u = (t - e.t0) / Math.max(0.01, e.t1 - e.t0);
+      if (e.mode === 'hold') { holder = e.actor; visible = true; pos = null; }
+      else if (e.mode === 'hide') { visible = false; pos = null; }
+      else if (e.mode === 'toss' && live) {
+        holder = e.actor; visible = true;
+        const h = hand(e.actor), who = this.screen[e.actor];
+        const T = 1.3, ph = ((t - e.t0) % T) / T;
+        if (h && who) pos = [h[0], h[1] - 4 * who.h * 0.32 * ph * (1 - ph)];
+        spin = t * 9;
+      } else if (e.mode === 'pass' && live) {
+        visible = true;
+        const T = Math.min(1.6, e.t1 - e.t0), n = Math.floor((t - e.t0) / T), ph = ((t - e.t0) % T) / T;
+        const [from, to] = n % 2 ? [e.to, e.actor] : [e.actor, e.to];
+        const p = hand(from), q = hand(to), who = this.screen[e.actor];
+        if (p && q && who) pos = arc(p, q, ph, who.h * 0.22);
+        holder = ph > 0.5 ? to : from;
+        spin = t * 9;
+      } else if (e.mode === 'roll') {
+        if (!live) { visible = false; pos = null; continue; }
+        const p = hand(e.actor) || pos, q = toScreen(e.x, e.y);
+        if (p) pos = arc(p, q, Math.min(1, u * 1.15), 120 * z);
+        visible = true; spin = t * 12;
+        if (u > 0.92) c.globalAlpha = Math.max(0, (1 - u) / 0.08);
+      } else if (!live && e.mode === 'pass') {
+        const T = Math.min(1.6, e.t1 - e.t0), n = Math.max(1, Math.round((e.t1 - e.t0) / T));
+        holder = n % 2 ? e.to : e.actor; pos = null; visible = true;
+      } else if (!live && e.mode === 'toss') { pos = null; }
+    }
+    if (!visible) { c.globalAlpha = 1; return; }
+    const [x, y] = pos || hand(holder) || [NaN, NaN];
+    if (!isFinite(x)) { c.globalAlpha = 1; return; }
+    c.save();
+    const glow = c.createRadialGradient(x, y, r * 0.6, x, y, r * 1.9);
+    glow.addColorStop(0, 'rgba(255,215,90,0.45)'); glow.addColorStop(1, 'rgba(255,215,90,0)');
+    c.fillStyle = glow; c.beginPath(); c.arc(x, y, r * 1.9, 0, Math.PI * 2); c.fill();
+    const g = c.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.1, x, y, r);
+    g.addColorStop(0, '#fff6b0'); g.addColorStop(0.45, '#f7ca39'); g.addColorStop(1, '#b5860f');
+    c.fillStyle = g; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill();
+    c.lineWidth = Math.max(1, r * 0.08); c.strokeStyle = '#6a4f08'; c.stroke();
+    c.strokeStyle = 'rgba(255,255,255,0.55)'; c.lineWidth = r * 0.12;          // spinning band = motion cue
+    c.beginPath(); c.ellipse(x, y, r * 0.85, r * 0.35, spin, 0, Math.PI * 2); c.stroke();
+    c.fillStyle = '#ffffff'; c.beginPath(); c.arc(x - r * 0.35, y - r * 0.38, r * 0.22, 0, Math.PI * 2); c.fill();
+    c.restore();
+    c.globalAlpha = 1;
   }
 
   uiSteam(c, [x, y], t, z) {

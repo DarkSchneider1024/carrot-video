@@ -111,7 +111,8 @@
      "id": "princess",
      "x": 1150,
      "y": 990,
-     "look": 0.3
+     "look": 0.3,
+     "puppet": "princess_noball"
     }
    ],
    "beats": [
@@ -126,6 +127,13 @@
       {
        "id": "princess",
        "gesture": "happy"
+      },
+      {
+       "id": "princess",
+       "ball": {
+        "mode": "toss",
+        "at": 1.0
+       }
       }
      ]
     },
@@ -136,6 +144,10 @@
       {
        "id": "princess",
        "gesture": "happy"
+      },
+      {
+       "id": "princess",
+       "ball": "toss"
       }
      ]
     },
@@ -152,6 +164,17 @@
        "id": "princess",
        "walk_to": 1380,
        "speed": 0.8
+      },
+      {
+       "id": "princess",
+       "ball": {
+        "roll_to": [
+         1720,
+         692
+        ],
+        "at": 2.3,
+        "dur": 0.9
+       }
       }
      ]
     },
@@ -165,7 +188,10 @@
       }
      ]
     }
-   ]
+   ],
+   "ball": {
+    "holder": "princess"
+   }
   },
   {
    "bg": "castle_garden",
@@ -282,10 +308,20 @@
        "fade_in": true,
        "at": 3.2,
        "fade_dur": 0.4
+      },
+      {
+       "id": "frog",
+       "ball": {
+        "mode": "hold",
+        "at": 3.2
+       }
       }
      ]
     }
-   ]
+   ],
+   "ball": {
+    "holder": null
+   }
   },
   {
    "bg": "castle_garden",
@@ -308,7 +344,8 @@
      "id": "princess",
      "x": 1380,
      "y": 990,
-     "look": 0.4
+     "look": 0.4,
+     "puppet": "princess_noball"
     },
     {
      "id": "frog",
@@ -322,6 +359,20 @@
      "who": "princess",
      "text": "哇！我的金球回來了！太棒了！",
      "do": [
+      {
+       "id": "frog",
+       "ball": {
+        "pass": "princess",
+        "dur": 0.8
+       }
+      },
+      {
+       "id": "princess",
+       "ball": {
+        "mode": "toss",
+        "at": 0.8
+       }
+      },
       {
        "id": "princess",
        "gesture": "happy"
@@ -351,7 +402,10 @@
       }
      ]
     }
-   ]
+   ],
+   "ball": {
+    "holder": "frog"
+   }
   },
   {
    "bg": "palace_hall",
@@ -709,7 +763,8 @@
      "id": "princess",
      "x": 1150,
      "y": 990,
-     "look": 0.5
+     "look": 0.5,
+     "puppet": "princess_noball"
     },
     {
      "id": "prince",
@@ -734,13 +789,22 @@
      "text": "他們每天一起在花園裡玩金球，過著快樂的日子。",
      "do": [
       {
+       "id": "princess",
+       "ball": {
+        "pass": "prince"
+       }
+      },
+      {
        "id": "prince",
        "gesture": "happy"
       }
      ]
     }
    ],
-   "tail": 1.2
+   "tail": 1.2,
+   "ball": {
+    "holder": "princess"
+   }
   }
  ]
 }
