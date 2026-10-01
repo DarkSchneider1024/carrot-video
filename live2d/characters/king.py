@@ -9,6 +9,7 @@ import numpy as np
 
 import hunter as H
 import hunter_head as HH
+import vtuber_face as VF
 import red_hood as RH
 from girl import Part, hx, M
 from girl_v4 import R, Rell, CX, K, LW, SIDES, ID
@@ -120,7 +121,8 @@ def build():
             new.append(crown())
         if new:
             out.append((name, new))
-    return out
+    return VF.add(out, eyes={s: (*RIG['eyes'][s], 24, 5) for s in 'RL'}, mouth=(CX, RIG['mouth_y'] - 1, 17),
+                  eye_lw=2.2, mouth_lw=1.1)
 
 
 landmarks, body_landmarks = H.landmarks, H.body_landmarks
@@ -132,3 +134,4 @@ RIG['head3d']['layers']['頭頂髮'] = (1, 4)
 RIG['breath_lift'] = ['外套_R', '外套_L', '領子', '披肩毛領', '上臂_R', '上臂_L']
 HH.rig(RIG)
 HH.rig_body(RIG)
+VF.rig(RIG)          # VTuber blink (smiling ^) + D-shaped talking mouth (卡洛兒 v2 style)

@@ -183,7 +183,8 @@ def main():
                 else:
                     by[name] = make_part(name, eye_nodes[side], head=True)
             elif sub == '嘴':
-                by[name] = make_part(name, mouth, pivot=top_pivot if name in ('口腔', '舌頭') else None, head=True)
+                by[name] = make_part(name, mouth, pivot=top_pivot if name in ('口腔', '舌頭') or name.startswith('嘴_') else None,
+                                     head=True)
             else:
                 by[name] = make_part(name, head, pivot=top_pivot if name in HAIR or top == '後髮' else None, head=True)
 
@@ -273,7 +274,24 @@ def main():
     params.append(pm11('Head:: Roll', [val_binding(head, 'transform.r.z', [[-0.12], [0.0], [0.12]])]))
 
     # Eye blink (0 open, 1 closed)
+    VT = RIG.get('vtuber') and '閉眼_R' in by
+    def param3(name, binds, ax):
+        return param(name, False, [0.0, 0.0], [1.0, 1.0], [0.0, 0.0], list(ax), [0.0], binds)
     for side, pname in (('L', 'Eye:: Left:: Blink'), ('R', 'Eye:: Right:: Blink')):
+        if VT:
+            # VTuber blink (卡洛兒 v2): 0..0.6 the open eye squashes, 0.6..1 it cross-fades into the smiling ^ arc
+            drop = RIG['blink_drop'] * U
+            bl = [val_binding(ball_nodes[side], 'transform.s.y', [[1.0], [0.45], [0.05]])]
+            for nm in ('上眼線', '上睫毛'):
+                if f'{nm}_{side}' in by:
+                    bl.append(val_binding(by[f'{nm}_{side}'], 'transform.t.y', [[0.0], [drop * 0.6], [drop]]))
+            eye_parts = [n for n, inf in parts.items() if len(inf['group']) > 1 and inf['group'][1] == f'眼_{side}'
+                         and not n.startswith('眼窩')]            # (the frog's eye bump stays)
+            for nm in eye_parts:
+                bl.append(val_binding(by[nm], 'opacity', [[0.0], [0.0], [1.0]] if nm.startswith('閉眼')
+                                      else [[1.0], [1.0], [0.0]]))
+            params.append(param3(pname, bl, (0.0, 0.6, 1.0)))
+            continue
         bl = [val_binding(ball_nodes[side], 'transform.s.y', [[1.0], [0.06]])]
         for nm in ('上眼線', '上睫毛'):
             if f'{nm}_{side}' in by:
@@ -282,12 +300,28 @@ def main():
         params.append(p01(pname, bl))
 
     # Mouth:: Open
-    mo = []
-    for nm, key, v in RIG['mouth_open']:
-        if nm in by:
-            base = 1.0 if key.startswith('transform.s') else 0.0
-            mo.append(val_binding(by[nm], key, [[base], [v * (U if key.startswith('transform.t') else 1.0)]]))
-    params.append(p01('Mouth:: Open', mo))
+    if RIG.get('vtuber') and '嘴_啊' in by:
+        # VTuber mouth: the drawn mouths fade in and unfold from their top edge (nothing is stretched sideways --
+        # the old 口腔 stretch slid off the face on a head turn); Mouth:: Form picks 'ah' (0) or 'oh' (1)
+        mo = []
+        for nm, inf in parts.items():
+            if len(inf['group']) > 1 and inf['group'][1] == '嘴':
+                if nm.startswith('嘴_'):
+                    mo += [val_binding(by[nm], 'opacity', [[0.0], [1.0], [1.0]]),
+                           val_binding(by[nm], 'transform.s.y', [[0.15], [0.55], [1.0]]),
+                           val_binding(by[nm], 'transform.s.x', [[0.85], [0.92], [1.0]])]
+                else:
+                    mo.append(val_binding(by[nm], 'opacity', [[1.0], [0.0], [0.0]]))
+        params.append(param3('Mouth:: Open', mo, (0.0, 0.3, 1.0)))
+        params.append(p01('Mouth:: Form', [val_binding(by['嘴_啊'], 'opacity', [[1.0], [0.0]]),
+                                           val_binding(by['嘴_喔'], 'opacity', [[0.0], [1.0]])]))
+    else:
+        mo = []
+        for nm, key, v in RIG['mouth_open']:
+            if nm in by:
+                base = 1.0 if key.startswith('transform.s') else 0.0
+                mo.append(val_binding(by[nm], key, [[base], [v * (U if key.startswith('transform.t') else 1.0)]]))
+        params.append(p01('Mouth:: Open', mo))
 
     # Body:: Breath
     br = [val_binding(head, 'transform.t.y', [[0.0], [-1.6 * U]])]

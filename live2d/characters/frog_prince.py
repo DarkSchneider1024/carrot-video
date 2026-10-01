@@ -14,6 +14,7 @@ import numpy as np
 
 from girl import Part, hx, M
 from girl_v4 import R, Rell, CX, SIDES, ID, K, LW
+import vtuber_face as VF
 
 GRN, GRN_SH, GRN_HI, GRN_LN = hx('5cb84e'), hx('3f8a36'), hx('8ad872'), hx('1d4a18')
 BELLY, BELLY_SH, BELLY_LN = hx('eef5c0'), hx('cfdc92'), hx('7f9148')
@@ -223,7 +224,8 @@ def build():
     h.append(('眼_L', eye('L')))
     h.append(crown())
     G.append(('頭', h))
-    return G
+    return VF.add(G, eyes={'R': (CX - EYE_DX, EYE_Y + 6, 62, 14), 'L': (CX + EYE_DX, EYE_Y + 6, 62, 14)},
+                  mouth=(CX, MOUTH_Y, 78), eye_lw=4.2, mouth_lw=2.2)
 
 
 def landmarks():
@@ -252,3 +254,4 @@ RIG = dict(
     lifts=[{'param': 'Leg:: Right:: Step', 'parts': ['腿_R', '腳_R'], 'dy': -18},
            {'param': 'Leg:: Left:: Step', 'parts': ['腿_L', '腳_L'], 'dy': -18}],
 )
+VF.rig(RIG)          # VTuber blink (smiling ^) + D-shaped talking mouth (卡洛兒 v2 style)

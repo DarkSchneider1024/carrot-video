@@ -19,6 +19,7 @@ if ENGINE not in sys.path:
 import girl_dress as GD
 import girl_v4 as G4
 import red_hood as RH
+import vtuber_face as VF
 from girl import Part, hx, M
 from girl_v4 import R, Rell, CX, LW, K
 
@@ -179,6 +180,8 @@ def build():
             items = body
         out.append((name, items))
     groups = out
+    groups = VF.add(groups, eyes={'R': (G4.EYE_CX_R, G4.EYE_Y + 1, 40, 7), 'L': (G4.EYE_CX_L, G4.EYE_Y + 1, 40, 7)},
+                    mouth=(CX, G4.MOUTH_Y - 0.5, 26), eye_lw=2.6, mouth_lw=1.4)
     new = []
     for name, items in groups:
         if name == '頭':
@@ -205,3 +208,4 @@ RIG['arm_parts']['R'].append('道具_金球')
 RIG['breath_scale'] = RIG['breath_scale'] + ['蕾絲胸衣']
 # kid-friendly: no chest bounce (the flat lace front stays put; nothing underneath can peek out)
 RIG['chest'] = dict(RIG['chest'], sway=0.0, bounce=0.0, squash=0.0)
+VF.rig(RIG)          # VTuber blink (smiling ^) + D-shaped talking mouth (卡洛兒 v2 style)

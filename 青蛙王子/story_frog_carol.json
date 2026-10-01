@@ -18,7 +18,7 @@
  },
  "cast": {
   "carol": {
-   "puppet": "carrot_girl",
+   "puppet": "carol_v2",
    "height": 820
   }
  },
@@ -28,13 +28,13 @@
    "camera": [
     {
      "at": 0.0,
-     "x": 992,
+     "x": 1031,
      "y": 348,
      "zoom": 2.6
     },
     {
      "at": 1.0,
-     "x": 992,
+     "x": 1031,
      "y": 348,
      "zoom": 2.6
     }

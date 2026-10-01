@@ -9,6 +9,7 @@ import numpy as np
 
 import hunter as H
 import hunter_head as HH
+import vtuber_face as VF
 import red_hood as RH
 from girl import Part, hx, M
 from girl_v4 import R, Rell, CX, K, LW, SIDES, ID
@@ -38,21 +39,38 @@ DROP = {'獵槍', '背帶', '帽子', '羽毛', '鬍子', '八字鬍', '腮紅'}
 
 @HH.scaled
 def top_hair():
-    """full head of blond hair with side-swept bangs (the hunter's hat used to cover the crown)"""
+    """Sasuke-style front hair (user: the prince's hair looked dull): pointed bangs parted over the forehead and
+    two long side locks framing the face down to the jaw"""
     p = Part('頭頂髮')
-    right = [(CX, 78), (258, 80), (230, 90), (208, 110), (198, 140), (197, 176), (204, 180), (210, 150), (222, 128),
-             (240, 120)]
-    left = [(300, 132), (318, 120), (340, 126), (356, 146), (366, 176), (374, 176), (373, 140), (363, 110),
-            (341, 90), (313, 80)]
-    bangs = right + [(262, 130), (274, 142, 'c'), (282, 128), (296, 146, 'c')] + left
-    pts = R(bangs)
-    p.fill(pts, HAIR)
-    p.air(R([(230, 84), (300, 84), (300, 104), (230, 104)]), HAIR_HI, blur=8)
-    p.air(R([(196, 130), (215, 130), (215, 180), (196, 180)]), HAIR_SH, blur=6)
-    p.air(M(R([(196, 130), (215, 130), (215, 180), (196, 180)])), HAIR_SH, blur=6)
-    for x0 in (236, 256, 280, 306, 330):
-        p.strand(R([(x0, 88), (x0 + 6, 110), (x0 + 4, 126)]), 1.2, HAIR_SH)
-    p.line(pts, LW, HAIR_LN, closed=True)
+    pts = [(206, 248, 'c'), (199, 205), (197, 162), (203, 128), (219, 104), (249, 89), (285, 84), (321, 89), (351, 104),
+           (367, 128), (373, 162), (371, 205), (364, 248, 'c'), (354, 210), (349, 172),
+           (342, 146), (334, 162, 'c'), (322, 134), (310, 158, 'c'), (297, 128), (283, 154, 'c'), (268, 126),
+           (254, 156, 'c'), (242, 132), (229, 166, 'c'), (220, 196)]
+    p.fill(R(pts), HAIR)
+    p.air(R([(240, 88), (330, 88), (330, 108), (240, 108)]), HAIR_HI, blur=8)
+    p.air(R([(196, 150), (222, 150), (222, 250), (196, 250)]), HAIR_SH, blur=6)
+    p.air(M(R([(196, 150), (222, 150), (222, 250), (196, 250)])), HAIR_SH, blur=6)
+    for a, b, c in [((250, 96), (246, 120), (254, 152)), ((276, 92), (272, 118), (282, 150)), ((304, 94), (306, 118), (309, 154)),
+                    ((332, 100), (336, 124), (333, 158)), ((212, 130), (208, 180), (208, 236)), ((358, 130), (362, 180), (362, 236))]:
+        p.strand(R([a, b, c]), 1.3, HAIR_SH)
+    p.line(R(pts), LW, HAIR_LN, closed=True)
+    return p
+
+
+@HH.scaled
+def spiky_back():
+    """the spikes at the back of the head, sticking out behind the crown (Sasuke)"""
+    p = Part('後髮_刺')
+    # swept back and up to one side, uneven (a symmetric fan looked like a crown / flames)
+    pts = [(205, 205), (197, 152), (188, 122, 'c'), (212, 114), (218, 84, 'c'), (244, 92), (268, 58, 'c'), (288, 82),
+           (322, 44, 'c'), (330, 84), (370, 62, 'c'), (362, 104), (402, 104, 'c'), (380, 142), (396, 174, 'c'),
+           (372, 182), (366, 205)]
+    p.fill(R(pts), HAIR_SH)
+    p.air(R([(220, 40), (330, 40), (330, 90), (220, 90)]), HAIR, blur=10)
+    for a, b in [((268, 60), (262, 104)), ((322, 46), (306, 100)), ((370, 64), (338, 108)), ((402, 106), (360, 130)),
+                 ((218, 86), (230, 116))]:
+        p.strand(R([a, ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2), b]), 1.2, HAIR_LN)
+    p.line(R(pts), LW, HAIR_LN, closed=True)
     return p
 
 
@@ -81,7 +99,7 @@ def gold_trim(p, side):
 
 SKIN, SKIN_SH, SKIN_HI, SKIN_LN = H.SKIN, H.SKIN_SH, H.SKIN_HI, H.SKIN_LN
 IRIS, IRIS_DK, IRIS_HI = hx('3a7fd0'), hx('1c3f7a'), hx('8fc8ff')
-EYE_Y, EYE_DX, S = 186, 36, 1.35
+EYE_Y, EYE_DX, S = 187, 35, 1.1        # (user: eyes were too big -- 1.35 -> 1.1)
 
 
 @HH.scaled
@@ -202,12 +220,15 @@ def build():
                 continue
             fix(it)
             new.append(it)
+            if it.name == '後髮':
+                new.append(spiky_back())
         if name == '頭':
             new.append(top_hair())
             new.append(circlet())
         if new:
             out.append((name, new))
-    return out
+    return VF.add(out, eyes={s: (*RIG['eyes'][s], 33, 7) for s in 'RL'}, mouth=(CX, RIG['mouth_y'] - 1, 20),
+                  eye_lw=2.4, mouth_lw=1.2)
 
 
 landmarks, body_landmarks = H.landmarks, H.body_landmarks
@@ -216,8 +237,10 @@ for k in ('帽子', '羽毛', '鬍子', '八字鬍'):
     RIG['head3d']['layers'].pop(k, None)
 RIG['head3d']['layers']['王冠'] = (1, 12)
 RIG['head3d']['layers']['頭頂髮'] = (1, 6)
+RIG['head3d']['layers']['後髮_刺'] = (-1, 4)
 RIG['breath_lift'] = ['外套_R', '外套_L', '領子', '上臂_R', '上臂_L']
 RIG['eyes'] = {'R': (CX - EYE_DX, EYE_Y), 'L': (CX + EYE_DX, EYE_Y)}
-RIG['lower_lid_dy'], RIG['blink_drop'] = 12, 27
+RIG['lower_lid_dy'], RIG['blink_drop'] = 10, 22
 HH.rig(RIG)
 HH.rig_body(RIG)
+VF.rig(RIG)          # VTuber blink (smiling ^) + D-shaped talking mouth (卡洛兒 v2 style)

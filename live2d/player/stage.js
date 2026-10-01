@@ -151,7 +151,7 @@ export class GL {                     // also used by the web demo (transparent 
     }
     const keep = (n) => !only || (only === 'body' ? !n.inHead
       : n.inHead && ((only === 'headBack') === (n.z > p._neckZ)));
-    const order = [...p.parts].filter((n) => n.enabled && keep(n)).sort((a, b) => b.z - a.z);
+    const order = [...p.parts].filter((n) => n.enabled && keep(n) && (n.alpha ?? 1) > 0).sort((a, b) => b.z - a.z);
     for (const n of order) {
       const m = n.mesh, M = n.world, nv = m.verts.length / 2;
       const pos = new Float32Array(nv * 2);
@@ -162,7 +162,7 @@ export class GL {                     // also used by the web demo (transparent 
         pos[2 * i + 1] = M[1] * x + M[3] * y + M[5];
       }
       if (!m._uv) { m._uv = new Float32Array(m.uvs); m._idx = new Uint16Array(m.indices); }
-      this.mesh(pos, m._uv, m._idx, texs[n.textures[0]], k, ox, oy, n.opacity ?? 1);
+      this.mesh(pos, m._uv, m._idx, texs[n.textures[0]], k, ox, oy, n.alpha ?? n.opacity ?? 1);   // alpha = opacity x opacity bindings
     }
   }
 }
@@ -361,6 +361,8 @@ class Actor {
     p.set('Head:: Roll', clamp(st.roll, -1, 1));
     p.set('Eye:: Left:: Blink', blink); p.set('Eye:: Right:: Blink', blink);
     p.set('Mouth:: Open', clamp(talk * 1.1, 0, 1));
+    // vowel shape while talking (VTuber mouths: wide 'ah' and small round 'oh' alternate -- models with Mouth:: Form)
+    p.set('Mouth:: Form', clamp(0.5 + 1.1 * Math.sin(lt * 4.3) * Math.sin(lt * 2.7 + 1.3), 0, 1));
     p.set('Body:: Breath', 0.5 + 0.5 * Math.sin((lt / 3.4) * Math.PI * 2));
     p.set('Arm:: Right:: Swing', clamp(st.armR, -1, 1)); p.set('Arm:: Left:: Swing', clamp(st.armL, -1, 1));
     p.set('Arm:: Right:: Bend', clamp(st.bendR, 0, 1)); p.set('Arm:: Left:: Bend', clamp(st.bendL, 0, 1));
